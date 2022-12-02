@@ -58,7 +58,7 @@
                 </div>
             </a>
             <hr class="dropdown-divider" />
-            <a href="#" class="dropdown-item is-media">
+            {{-- <a href="#" class="dropdown-item is-media">
                 <div class="icon">
                     <i class="lnil lnil-cog"></i>
                 </div>
@@ -66,10 +66,11 @@
                     <span>Settings</span>
                     <span>Account settings</span>
                 </div>
-            </a>
+            </a> --}}
             <hr class="dropdown-divider" />
             <div class="dropdown-item is-button">
-                <a class="button h-button  is-primary is-raised is-fullwidth logout-button " href="{{ route('logout') }}"
+                <a class="button h-button  is-primary is-raised is-fullwidth logout-button "
+                    href="{{ route('logout') }}"
                     onclick="event.preventDefault();
               document.getElementById('logout-form').submit();">
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

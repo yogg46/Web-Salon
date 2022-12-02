@@ -8,11 +8,15 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
     <title>{{ $tittle }}</title>
-    <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+    <link rel="icon" type="image/png" href="/assets/img/logos/logo/logo4.png" />
 
     <!--Core CSS -->
     <link rel="stylesheet" href="/assets/css/app.css" />
+    {{-- <link rel="stylesheet" href="/assets/css/bootstrap.css" /> --}}
     <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/new.css" />
+    @livewireStyles
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css" />
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap"
@@ -42,9 +46,9 @@
                         </div>
                     </div>
 
-                    <a class="navbar-item is-brand" href="index.html">
-                        <img class="light-image" src="/assets/img/logos/logo/logo.svg" alt="">
-                        <img class="dark-image" src="/assets/img/logos/logo/logo-light.svg" alt="">
+                    <a class="navbar-item is-brand" href="/">
+                        <img class="light-image" src="/assets/img/logos/logo/logo4.png" alt="">
+                        <img class="dark-image" src="/assets/img/logos/logo/logo5.png" alt="">
                     </a>
 
                     <div class="brand-end">
@@ -755,21 +759,82 @@
         <!-- Huro js -->
         <script src="/assets/js/functions.js"></script>
         <script src="/assets/js/main.js" async></script>
+        {{-- <script src="/assets/js/bootstrap.js" async></script> --}}
         <script src="/assets/js/components.js" async></script>
         <script src="/assets/js/popover.js" async></script>
         <script src="/assets/js/widgets.js" async></script>
-
+        <script src="assets/js/touch.js" async></script>
+        <script src="assets/js/apps-1.js" async></script>
+        <script src="assets/js/saas-billing.js" async></script>
+        <script src="assets/js/syntax.js" async></script>
 
         <!-- Additional Features -->
         <script src="/assets/js/touch.js" async></script>
+        <script type="text/javascript">
+            window.livewire.on('save123', () => {
+                $('#add-barang').modal('is-vhidden');
+            })
+            window.addEventListener('closeModal', event => {
+                $("#add-barang").modal('is-vhidden');
+            })
+            window.livewire.on('save123', () => {
+                $('#add-barang').modal('is-vhidden');
+            })
+            window.addEventListener('closeModal', event => {
+                $("#add-barang").modal('is-vhidden');
+            })
+        </script>
+        @livewireScripts
 
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <x-livewire-alert::scripts />
+        <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
+        <x-livewire-alert::flash />
         <!-- Landing page js -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        @include('sweetalert::alert')
 
         <!-- Dashboards js -->
 
 
+        <script wire:ignore>
+            window.addEventListener('swal:confirm', event => {
+                swal.fire({
+                        title: event.detail.title,
+                        text: event.detail.text,
+                        icon: event.detail.type,
+                        showCancelButton: true,
+                        reverseButtons: true
+                    })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            window.livewire.emit('delete', event.detail.id);
+                        }
+                    });
+            });
 
-
+            $(document).ready(function() {
+                $("#add-barang").on('is-vhidden', function() {
+                    livewire.emit('onCloseModal');
+                });
+            });
+            window.addEventListener('swal:confirmpass', event => {
+                swal.fire({
+                        title: event.detail.title,
+                        text: event.detail.text,
+                        icon: event.detail.type,
+                        showCancelButton: true,
+                        reverseButtons: true
+                    })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            window.livewire.emit('resetpass', event.detail.id);
+                        }
+                    });
+            });
+        </script>
+        @stack('scripts')
 
 
 

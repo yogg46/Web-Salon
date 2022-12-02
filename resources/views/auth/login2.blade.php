@@ -43,8 +43,9 @@
                                 <div class="container">
                                     <div class="columns">
                                         <div class="column">
-                                            <img class="hero-image" src="/assets/img/illustrations/login/station.svg"
+                                            <img class="hero-image " src="/assets/img/logos/logo/logo1.png"
                                                 alt="">
+
                                         </div>
                                     </div>
                                 </div>

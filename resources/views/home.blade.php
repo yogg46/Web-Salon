@@ -1,89 +1,68 @@
 @extends('layouts.main')
 
 @section('isi')
-    <div class="wizard-v1-wrapper">
+    @if (Auth::user()->role == 'kasir')
+        <div class="personal-dashboard personal-dashboard-v1">
 
-        <div id="wizard-step-0" class="inner-wrapper is-active" data-step-title="Project Type">
-            <!--src/partials/pages/wizard/wizard-v1/-->
-            <div class="step-content">
-
-                <div class="step-title">
-                    <h2 class="dark-inverted"></h2>
+            <!--Header-->
+            {{-- <div class="dashboard-header">
+                <!-- <div class="h-avatar is-large">
+                <img class="avatar" src="https://via.placeholder.com/150x150" data-demo-src="assets/img/avatars/photos/8.jpg" alt="">
+            </div> -->
+                <div class="start">
+                    <h3>Selamat datang di dashboard</h3>
                 </div>
+                <!-- <div class="end">
+                <button class="button h-button is-dark-outlined">View Reports</button>
+                <button class="button h-button is-primary is-elevated">Manage Store</button>
+            </div> -->
+            </div> --}}
 
-                <div class="wizard-types">
-                    <div class="columns ">
-                        @if (Auth::user()->role == 'admin')
-                            <div class="column is-6">
-                                <div class="wizard-card">
-                                    <img src="/assets/img/illustrations/wizard/type-1.svg" alt="" />
-                                    <h3 class="dark-inverted">Tambah User</h3>
-                                    <p></p>
-                                    <div class="button-wrap">
-                                        <a href="#"
-                                            class="button h-button is-primary is-rounded is-elevated is-bold type-select-button">Lanjut</a>
+            <!--Body-->
+            <div class="personal-dashboard personal-dashboard-v3">
+                <div class="columns">
+
+                    <!--Card-->
+                    <div class="column is-8">
+                        <div class="stats-wrapper">
+                            <!--Stat-->
+
+                            <div class="columns is-multiline is-flex-tablet-p">
+                                <!-- <stat> -->
+                                <div class="column is-6">
+                                    <div class="dashboard-card">
+                                        <div class="media-flex-center">
+                                            <div class="h-icon is-purple is-rounded">
+                                                <i class="lnil lnil-analytics-alt-1"></i>
+                                            </div>
+                                            <div class="flex-meta">
+                                                <span>62K</span>
+                                                <span>Jasa</span>
+                                            </div>
+                                        </div>
                                     </div>
-
+                                </div>
+                                <!-- <stat> -->
+                                <div class="column is-6">
+                                    <div class="dashboard-card">
+                                        <div class="media-flex-center">
+                                            <div class="h-icon is-purple is-rounded">
+                                                <i class="lnil lnil-analytics-alt-1"></i>
+                                            </div>
+                                            <div class="flex-meta">
+                                                <span>62K</span>
+                                                <span>Laporan</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="column is-6">
-                                <div class="wizard-card">
-                                    <img src="/assets/img/illustrations/wizard/type-2.svg" alt="" />
-                                    <h3 class="dark-inverted">Daftar User</h3>
-                                    <p></p>
-                                    <div class="button-wrap">
-                                        <a href="#"
-                                            class="button h-button is-primary is-rounded is-elevated is-bold type-select-button">Lanjut</a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        @endif
-
-
-
-                        @if (Auth::user()->role == 'kasir')
-                            <div class="column is-4">
-                                <div class="wizard-card">
-                                    <img src="/assets/img/illustrations/wizard/type-1.svg" alt="" />
-                                    <h3 class="dark-inverted">Kasir</h3>
-                                    <p></p>
-                                    <div class="button-wrap">
-                                        <a href="/kasir"
-                                            class="button h-button is-primary is-rounded is-elevated is-bold type-select-button">Lanjut</a>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="column is-4">
-                                <div class="wizard-card">
-                                    <img src="/assets/img/illustrations/wizard/type-2.svg" alt="" />
-                                    <h3 class="dark-inverted">Jasa</h3>
-                                    <p></p>
-                                    <div class="button-wrap">
-                                        <a href="#"
-                                            class="button h-button is-primary is-rounded is-elevated is-bold type-select-button">Lanjut</a>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="column is-4">
-                                <div class="wizard-card">
-                                    <img src="/assets/img/illustrations/wizard/type-3.svg" alt="" />
-                                    <h3 class="dark-inverted">Laporan</h3>
-                                    <p></p>
-                                    <div class="button-wrap">
-                                        <a href="#"
-                                            class="button h-button is-primary is-rounded is-elevated is-bold type-select-button">Lanjut</a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        @endif
-
-
+                        </div>
                     </div>
+
+
                 </div>
             </div>
         </div>
-    @endsection
+    @endif
+@endsection
