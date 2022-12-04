@@ -52,7 +52,7 @@
                     </a>
 
                     <div class="brand-end">
-                        <div class="navbar-item has-dropdown is-notification is-hidden-tablet is-hidden-desktop">
+                        {{-- <div class="navbar-item has-dropdown is-notification is-hidden-tablet is-hidden-desktop">
                             <a class="navbar-link is-arrowless" href="javascript:void(0);">
                                 <i data-feather="bell"></i>
                                 <span class="new-indicator pulsate"></span>
@@ -101,7 +101,7 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         @include('layouts.profil_logout', [
                             'para' => 'is-right is-spaced dropdown-trigger user-dropdown',
@@ -131,9 +131,9 @@
                 {{-- <a class="menu-item is-flex right-panel-trigger" data-panel="languages-panel">
                     <img src="/assets/img/icons/flags/united-states-of-america.svg" alt="">
                 </a> --}}
-                <a href="/admin-profile-notifications.html" class="menu-item is-flex">
+                {{-- <a href="/admin-profile-notifications.html" class="menu-item is-flex">
                     <i data-feather="bell"></i>
-                </a>
+                </a> --}}
                 {{-- <a class="menu-item is-flex right-panel-trigger" data-panel="activity-panel">
                     <i data-feather="grid"></i>
                 </a> --}}
@@ -675,7 +675,7 @@
 
 
                             <div class="toolbar-notifications is-hidden-mobile">
-                                <div class="dropdown is-spaced is-dots is-right dropdown-trigger">
+                                {{-- <div class="dropdown is-spaced is-dots is-right dropdown-trigger">
                                     <div class="is-trigger" aria-haspopup="true">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -730,7 +730,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
 
 

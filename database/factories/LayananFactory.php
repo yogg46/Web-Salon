@@ -19,7 +19,7 @@ class LayananFactory extends Factory
     {
         $kasir = User::where('role', 'kasir')->pluck('id');
         return [
-            'tanggal' => now(),
+            'tanggal' => now()->format('d-m-Y'),
             'total' => fake()->numberBetween(10000, 200000),
             'user_id' => fake()->randomElement($kasir),
         ];

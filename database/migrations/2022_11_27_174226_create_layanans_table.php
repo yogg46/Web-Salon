@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('layanans', function (Blueprint $table) {
             $table->id();
             $table->string('tanggal');
+            $table->string('manufaktur');
             $table->integer('total');
             $table->unsignedBigInteger('user_id')->constrained()
                 ->onUpdate('cascade');

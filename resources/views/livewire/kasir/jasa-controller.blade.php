@@ -49,7 +49,7 @@
                 </span>
             </a>
             <a class="button h-button is-primary is-elevated  h-modal-trigger" wire:modal="isopen()"
-                data-modal="add-user">
+                data-modal="add-jasa">
                 <span class="icon">
                     <i aria-hidden="true" class="fas fa-plus"></i>
                 </span>
@@ -63,6 +63,7 @@
 
     </div>
     @include('livewire.kasir.add-kategori')
+    @include('livewire.kasir.add-jasa')
     @if ($select == 1)
 
         <div class="table-wrapper">
@@ -158,8 +159,15 @@
                 window.livewire.emit('close');
             });
 
-            window.livewire.on('close', () => {
+            window.livewire.on('close-modal', () => {
                 $('#add-kategori').modal('close');
+            });
+
+            window.livewire.on('close-modal', () => {
+                $('#add-kategori').modal('hide');
+            });
+            window.livewire.on('close-modal', () => {
+                $('#add-kategori').modal('isClose');
             });
         </script>
     @endpush

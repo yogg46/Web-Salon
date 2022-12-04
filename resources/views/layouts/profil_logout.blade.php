@@ -48,7 +48,7 @@
                     <span>{{ Auth::user()->role }}</span>
                 </div>
             </div>
-            <a href="/admin-profile-view.html" class="dropdown-item is-media">
+            <a href="/profil" class="dropdown-item is-media">
                 <div class="icon">
                     <i class="lnil lnil-user-alt"></i>
                 </div>

@@ -29,8 +29,8 @@
                                         <h3>SALON KECANTIKAN </h3>
                                     </div>
                                     <br>
-                                    {{ var_export($cek) }}
-                                    {{ var_export($jumlah) }}
+                                    {{-- {{ var_export($cek) }} --}}
+                                    {{-- {{ var_export($jumlah) }} --}}
                                     <div class="right">
                                     </div>
                                 </div>
@@ -76,12 +76,13 @@
                                                 <div class="column is-4">
                                                     <div class="">
                                                         <div class="inputGroup s-card is-raised demo-s-card">
-                                                            <input {{-- wire:change='rep({{ $j->id }})' --}} wire:model="cek"
-                                                                type="checkbox" value="{{ $j->id }}"
+                                                            <input wire:change='rep({{ $j->id }})'
+                                                                wire:model="cek" type="checkbox"
+                                                                value="{{ $j->id }}"
                                                                 id="option{{ $j->id }}">
                                                             <label class="title is-6"
                                                                 for="option{{ $j->id }}">{{ $j->nama_jasa }}</label>
-                                                            {{-- <h3 >Raised S-Card</h3> --}}
+                                                            <h3>{{ $j->jasaRelasiKategori->kategori }}</h3>
 
                                                         </div>
                                                     </div>
@@ -123,8 +124,8 @@
                                         <h3 class="is-bigger">NOTA</h3>
                                     </div>
                                     <div class="right">
-                                        <span class="tag is-curved">{{ array_sum($jumlah) }} items</span>
-                                        {{-- <span class="tag is-curved">{{ var_export($jumlah) }} items</span> --}}
+                                        {{-- <span class="tag is-curved">{{ $item }} items</span> --}}
+                                        {{-- <span class="tag is-curved">{{ array_sum($jumlah) }} items</span> --}}
                                     </div>
                                 </div>
                                 <!-- <div class="section-placeholder">

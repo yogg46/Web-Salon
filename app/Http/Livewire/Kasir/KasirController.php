@@ -50,16 +50,15 @@ class KasirController extends Component
     public function itemTot()
     {
         $this->item = 0;
-        if (count($this->cek) == count($this->jumlah)) {
+        // if (count($this->cek) == count($this->jumlah)) {
 
-            $this->item = array_combine($this->cek, $this->jumlah);
-        }
+        //     $this->item = array_combine($this->cek, $this->jumlah);
+        // }
         // foreach ($this->cek as $key => $value) {
-        //     if ($key) {
-        //         if (in_array($this->jumlah[$value], $this->cek, TRUE)) {
-        //             $this->item += $this->jumlah[$value];
-        //         };
-        //     }
+        //     if (in_array($this->jumlah[$value], $this->cek, TRUE)) {
+        //         $this->item += $this->jumlah[$value];
+        //     };
+        //     // @dd($this->jumlah[$value]);
         // }
     }
 
@@ -78,9 +77,10 @@ class KasirController extends Component
         $this->itemTot();
     }
 
-    public function rep($itu)
+    public function rep()
     {
-        $this->jumlah[$itu] = 1;
+        $this->totalasu();
+        // $this->itemTot();
     }
     public function totalasu()
     {

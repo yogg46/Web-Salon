@@ -1,34 +1,21 @@
 @extends('layouts.main')
 
 @section('isi')
-    @if (Auth::user()->role == 'kasir')
+
         <div class="personal-dashboard personal-dashboard-v1">
 
-            <!--Header-->
-            {{-- <div class="dashboard-header">
-                <!-- <div class="h-avatar is-large">
-                <img class="avatar" src="https://via.placeholder.com/150x150" data-demo-src="assets/img/avatars/photos/8.jpg" alt="">
-            </div> -->
-                <div class="start">
-                    <h3>Selamat datang di dashboard</h3>
-                </div>
-                <!-- <div class="end">
-                <button class="button h-button is-dark-outlined">View Reports</button>
-                <button class="button h-button is-primary is-elevated">Manage Store</button>
-            </div> -->
-            </div> --}}
 
-            <!--Body-->
             <div class="personal-dashboard personal-dashboard-v3">
                 <div class="columns">
 
                     <!--Card-->
-                    <div class="column is-8">
+                    <div class="column is-12">
                         <div class="stats-wrapper">
                             <!--Stat-->
 
                             <div class="columns is-multiline is-flex-tablet-p">
                                 <!-- <stat> -->
+                            @if (Auth::user()->role == 'kasir' || Auth::user()->role == 'bos' )
                                 <div class="column is-6">
                                     <div class="dashboard-card">
                                         <div class="media-flex-center">
@@ -36,8 +23,9 @@
                                                 <i class="lnil lnil-analytics-alt-1"></i>
                                             </div>
                                             <div class="flex-meta">
-                                                <span>62K</span>
-                                                <span>Jasa</span>
+                                                <span>Rp. {{$masuk}}</span>
+                                                <span>Pemasukan Hari Ini</span>
+                                                {{-- {{now()->format('m-d-Y')}} --}}
                                             </div>
                                         </div>
                                     </div>
@@ -50,12 +38,77 @@
                                                 <i class="lnil lnil-analytics-alt-1"></i>
                                             </div>
                                             <div class="flex-meta">
-                                                <span>62K</span>
-                                                <span>Laporan</span>
+                                                <span>Rp. {{$keluar}}</span>
+                                                <span>Pengeluaran Hari Ini</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                            @endif
+
+                            @if (Auth::user()->role == 'admin' )
+                            <div class="column is-12">
+                                <div class="dashboard-card">
+                                    <div class="media-flex-center">
+                                        <div class="h-icon is-purple is-rounded">
+                                            <i class="lnil lnil-analytics-alt-1"></i>
+                                        </div>
+                                        <div class="flex-meta">
+                                            <span>{{$admin}}</span>
+                                            <span>Jumlah User</span>
+                                            {{-- {{now()->format('m-d-Y')}} --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+                            @if (Auth::user()->role == 'gudang' )
+                            <div class="column is-4">
+                                <div class="dashboard-card">
+                                    <div class="media-flex-center">
+                                        <div class="h-icon is-purple is-rounded">
+                                            <i class="lnil lnil-analytics-alt-1"></i>
+                                        </div>
+                                        <div class="flex-meta">
+                                            <span>{{$Suplier}}</span>
+                                            <span>Jumlah Suplier </span>
+                                            {{-- {{now()->format('m-d-Y')}} --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column is-4">
+                                <div class="dashboard-card">
+                                    <div class="media-flex-center">
+                                        <div class="h-icon is-purple is-rounded">
+                                            <i class="lnil lnil-analytics-alt-1"></i>
+                                        </div>
+                                        <div class="flex-meta">
+                                            <span>{{$Pengambilan}}</span>
+                                            <span>Jumlah Pengambilan Hari ini</span>
+                                            {{-- {{now()->format('m-d-Y')}} --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-4">
+                                <div class="dashboard-card">
+                                    <div class="media-flex-center">
+                                        <div class="h-icon is-purple is-rounded">
+                                            <i class="lnil lnil-analytics-alt-1"></i>
+                                        </div>
+                                        <div class="flex-meta">
+                                            <span>Rp. {{$Pembelian}}</span>
+                                            <span>Total Pembelian Hari ini</span>
+                                            {{-- {{now()->format('m-d-Y')}} --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
                             </div>
                         </div>
                     </div>
@@ -64,5 +117,4 @@
                 </div>
             </div>
         </div>
-    @endif
 @endsection

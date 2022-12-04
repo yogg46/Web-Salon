@@ -87,14 +87,40 @@
                     </a>
                 </li>
 
-                <li>
+                {{-- <li>
                     <a class="single-link" href="/laporan">
                         <span class="icon">
                             <i data-feather="archive"></i>
                         </span>
                         Laporan
                     </a>
-                </li>
+                </li> --}}
+                <li class="has-children">
+                <div class="collapse-wrap">
+                    <a href="javascript:void(0);" class="parent-link">
+                        <div class="icon">
+                            <i data-feather="archive"></i>
+                        </div>
+                        Laporan
+                        <i data-feather="chevron-right"></i>
+                    </a>
+                </div>
+                <ul>
+                    <li>
+                        <a class="is-submenu" href="/laporan-pemasukan">
+                            <i class="lnil lnil-book"></i>
+                            <span>Laporan Pemasukan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="is-submenu" href="/laporan-pengeluaran">
+                            <i class="lnil lnil-book"></i>
+                            <span>Laporan Pengeluaran</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
             @endif
             @if (Auth::user()->role == 'gudang')
                 <li class="divider"></li>
@@ -162,13 +188,31 @@
                 </li> --}}
 
                 <li class="divider"></li>
-                <li>
-                    <a class="single-link" href="/laporan">
-                        <span class="icon">
-                            <i data-feather="archive"></i>
-                        </span>
-                        Laporan
-                    </a>
+                <li class="has-children">
+                    <div class="collapse-wrap">
+                        <a href="javascript:void(0);" class="parent-link">
+                            <div class="icon">
+                                <i data-feather="archive"></i>
+                            </div>
+                            Laporan
+                            <i data-feather="chevron-right"></i>
+                        </a>
+                    </div>
+                    <ul>
+                        <li>
+                            <a class="is-submenu" href="/laporan-pemasukan">
+                                <i class="lnil  lnil-book"></i>
+                                <span>Laporan Pemasukan</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="is-submenu" href="/laporan-pengeluaran">
+                                <i class="lnil lnil-book"></i>
+                                <span>Laporan Pengeluaran</span>
+                            </a>
+                        </li>
+
+                    </ul>
                 </li>
             @endif
 
