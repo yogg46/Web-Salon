@@ -8,7 +8,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title> Salon Fransisco</title>
-    <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+    <link rel="icon" type="image/png" href="/assets/img/logos/logo/logo4.png" />
 
     <!--Core CSS -->
     <link rel="stylesheet" href="/assets/css/app.css">
@@ -123,7 +123,7 @@
                                                 </span>
                                             </span>
                                         </label>
-                                        <div class="remember-me">Ingat Saya</div>
+                                        <div class="remember-me" >Ingat Saya</div>
                                     </div>
                                     <div class="button-wrap has-help">
                                         <button id="login-submit" type="submit"

@@ -30,6 +30,15 @@
                     </div>
 
                 </div>
+
+                <div class="field is-autocomplete" wire:ignore>
+                    <div class="control has-icon">
+                        <input id="autocomplete-barang" type="text" class="input" placeholder="Search people...">
+                        <div class="form-icon">
+                            <i data-feather="search"></i>
+                        </div>
+                    </div>
+                </div>
                 <div class="buttons">
 
                     <button class="button h-button is-primary is-elevated h-modal-trigger" data-modal="add-barang">
@@ -86,41 +95,28 @@
             </div>
 
         </div>
+        {{-- @dd($barang_json) --}}
     </div>
-    @push('scripts-barang')
-        //JS CODE
-        var demoSimpleOptions = {
-        url: '/bar',
-        getValue: "nama_barang",
-        template: {
-        type: "custom",
-        method: function (value, item) {
-        return `
-        <div class="template-wrapper">
-            <div class="entry-text">
-                <span>${value}</span>
-            </div>
-        </div>
-        `
-        }
-        },
-        highlightPhrase: false,
-        list: {
-        maxNumberOfElements: 5,
-        showAnimation: {
-        type: "fade", //normal|slide|fade
-        time: 400,
-        callback: function () { }
-        },
-        match: {
-        enabled: true
-        },
-        onChooseEvent: function () {
-        //do your stuff here
-        }
-        },
-        };
+    @push('scripts')
+        <script>
+            //JS CODE
+            var options = {
+                data: {!! $barang_json !!}
+            };
 
-        $("#barang-auto").easyAutocomplete(demoSimpleOptions);
+            // $("#basics").easyAutocomplete(options);
+
+            $("#autocomplete-barang").easyAutocomplete(options);
+
+            //MARKUP
+            //     <div class="field is-autocomplete">
+            //     <div class="control has-icon">
+            //         <input id="autocomplete-demo-simple" type="text" class="input" placeholder="Search people...">
+            //         <div class="form-icon">
+            //             <i data-feather="search"></i>
+            //         </div>
+            //     </div>
+            // </div>
+        </script>
     @endpush
 </div>

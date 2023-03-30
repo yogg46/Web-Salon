@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PrintController;
 use App\Http\Controllers\userController;
 use App\Http\Livewire\Admin\Index;
 use App\Http\Livewire\Profil;
@@ -11,7 +12,9 @@ use App\Http\Livewire\Kasir\JasaController;
 use App\Http\Livewire\Kasir\KasirController;
 use App\Http\Livewire\Kasir\LaporanKasir;
 use App\Http\Livewire\Kasir\Laporan2Kasir;
+use App\Mail\SendEmail;
 use App\Models\Barang as ModelsBarang;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,7 +33,7 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/', function () {
     return view('auth.login2');
-});
+})->name('landing');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth')->name('home');
@@ -49,3 +52,23 @@ Route::get('/laporan-pengeluaran', Laporan2Kasir::class)->middleware('auth', 'ch
 Route::view('/welcome', 'kasir', ['tittle' => 'Taylor']);
 // Route::view('/welcome', 'Admin.add', ['tittle' => 'Taylor']);
 Route::get('/bar', [userController::class, 'index']);
+
+
+Route::get('/print/{id}-{bayar}-{kembalian}', [PrintController::class, 'index']);
+
+
+// Route::get('/send-email',function(){
+//     $data = [
+//         'name' => 'Syahrizal As',
+//         'body' => 'Testing Kirim Email di Santri Koding'
+//     ];
+
+//     Mail::to('yogga.bayu46@gmail.com')->send(new SendEmail($data));
+
+// });
+
+// Route::view('/em','layouts.mail');
+Route::get('/em', function () {
+    $data = ['name' => 'John Doe', 'password' => 'johndoe@example.com'];
+    return view('layouts.mail', ['data' => $data]);
+});

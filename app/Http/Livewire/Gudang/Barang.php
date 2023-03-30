@@ -21,6 +21,7 @@ class Barang extends Component
     public $jumlah, $harga, $total, $subtotal, $tanggal;
     public $barang_id, $pembelian_id, $suplier_id;
     public  $untung;
+    public $barang_json;
 
     public function render()
     {
@@ -42,6 +43,12 @@ class Barang extends Component
             )
             ->section('isi');
     }
+
+    public function mount()
+    {
+        $this->barang_json = ModelsBarang::pluck('nama_barang')->toJson();
+    }
+
     public $inputs = [];
     public $i = 1;
 
@@ -107,11 +114,13 @@ class Barang extends Component
                 $pembelian = Pembelian::updateOrCreate([
                     'petugas_gudang' => Auth::user()->id,
                     'suplier_id' => $this->suplier_id, 'tanggal' => now()->format('d-m-Y'),
-                    'total' => array_sum($this->jumlah)]);
+                    'total' => array_sum($this->jumlah)
+                ]);
                 $detail = $pembelian->pembelianRelasiDetail()->create([
                     'jumlah' => $this->jumlah[$key], 'harga' => $this->harga[$key],
                     'subtotal' => ($this->jumlah[$key] * $this->harga[$key]),
-                    'barang_id' => $joko]);
+                    'barang_id' => $joko
+                ]);
             } else {
                 $barang = ModelsBarang::create([
                     'nama_barang' => $this->nama_barang[$key],
@@ -122,12 +131,14 @@ class Barang extends Component
                 $pembelian = Pembelian::updateOrCreate([
                     'petugas_gudang' => Auth::user()->id,
                     'suplier_id' => $this->suplier_id, 'tanggal' => now()->format('d-m-Y'),
-                    'total' => array_sum($this->jumlah)]);
+                    'total' => array_sum($this->jumlah)
+                ]);
                 $detail = $pembelian->pembelianRelasiDetail()->create([
                     'jumlah' => $this->jumlah[$key],
                     'harga' => $this->harga[$key],
                     'subtotal' => ($this->jumlah[$key] * $this->harga[$key]),
-                    'barang_id' => $barang->id]);
+                    'barang_id' => $barang->id
+                ]);
             }
         }
         $pembelian->update(['total' => $pembelian->pembelianRelasiDetail()->sum('subtotal')]);

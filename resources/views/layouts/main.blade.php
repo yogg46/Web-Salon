@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-    <title>{{ $tittle }}</title>
+    <title>Salon Fransisco</title>
     <link rel="icon" type="image/png" href="/assets/img/logos/logo/logo4.png" />
 
     <!--Core CSS -->
@@ -22,6 +22,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap"
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" rel="stylesheet" />
+
 
 </head>
 
@@ -834,7 +835,6 @@
                     });
             });
         </script>
-        @stack('scripts')
 
 
 
@@ -869,6 +869,12 @@
 
 
         <script src="/assets/js/syntax.js" async></script>
+        @stack('scripts')
+        @if (session()->has('redirect'))
+        <script>
+            window.open('{{ session('redirect') }}', '_blank');
+        </script>
+    @endif
     </div>
 </body>
 

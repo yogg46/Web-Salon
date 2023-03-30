@@ -2,11 +2,17 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Mail\ResetPassword;
+use App\Mail\SendEmail;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\WithPagination;
+use Nette\Utils\Random;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
 
 
 class Index extends Component
@@ -24,7 +30,7 @@ class Index extends Component
     public $hide;
     public $ids;
     public $User;
-    protected $listeners = ['closeModal', 'delete', 'resetpass'];
+    protected $listeners = ['delete', 'resetpass'];
 
     public $cc = '';
 
@@ -82,19 +88,27 @@ class Index extends Component
         ]);
 
         $simpan = new User;
-
+        $pss =  Str::random(20);
         $simpan->name = $this->name;
+        $simpan->password = Hash::make($pss);
         // $simpan->username = $this->username;
-
-
         $simpan->role = $this->role;
         $simpan->email = $this->email;
 
+
+        $data = [
+            'name' => $this->name,
+            'password' => $pss,
+            'email' => $this->email,
+        ];
+
+        Mail::to($this->email)->send(new SendEmail($data));
+
         $simpan->save();
         // session()->alert('message', 'Data Berhasil Disimpan.');
+        $this->emit('closeModal');
+        // $this->dispatchBrowserEvent('closeModal');
         $this->alert('success', 'Data Berhasil Disimpan');
-        $this->emit('save123');
-        $this->dispatchBrowserEvent('closeModal');
         $this->resetInput();
         // $this->doClose();
 
@@ -176,11 +190,18 @@ class Index extends Component
         $this->ids = $User->id;
         // $this->status = $User->status;
         $User = User::find($this->ids);
+        $pss =  Str::random(20);
         $User->update([
             'status' => 1,
-            'password' => $this->password = bcrypt('password')
+            'password' =>  Hash::make($pss),
         ]);
+        $data = [
+            'name' => $User->name,
+            'password' => $pss,
+            'email' => $User->email,
+        ];
 
+        Mail::to($User->email)->send(new ResetPassword($data));
 
         $this->alert('success', 'Password ' . $User->name . ' Berhasil Direset');
         // return redirect()->route('karyawan.index');

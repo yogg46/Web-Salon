@@ -61,8 +61,7 @@
         </div>
 
         <div class="buttons">
-            <a class="button h-button is-primary is-elevated  h-modal-trigger" wire:modal="isopen()"
-                data-modal="add-user">
+            <a class="button h-button is-primary is-elevated  h-modal-trigger" data-modal="add-user">
                 <span class="icon">
                     <i aria-hidden="true" class="fas fa-plus"></i>
                 </span>
@@ -129,9 +128,9 @@
                                 <p class="control">
 
                                     <button wire:click.prevent="konfimasiReset({{ $key->id }})"
-                                        class="button h-button is-info is-light is-raised >
+                                        class="button h-button is-info is-light is-raised">
                                         <span class="icon">
-                                        <i aria-hidden="true" class="lnil lnil-reload"></i>
+                                            <i aria-hidden="true" class="lnil lnil-reload"></i>
                                         </span>
                                         <span>Reset</span>
                                     </button>
@@ -171,6 +170,18 @@
         </div>
     </div> --}}
 
+    @push('js')
+        <script>
+            // window.addEventListener('closeModal', event => {
+            //         $("#add-user").modal('hide');
+            //     })
+            window.addEventListener('closeModal', event => {
+                    $("#add-user").closest(".modal").removeClass("is-active");
+                })
 
-
+            window.livewire.on('closeModal', () => {
+                $("#add-user").closest(".modal").removeClass("is-active");
+            })
+        <script>
+    @endpush
 </div>

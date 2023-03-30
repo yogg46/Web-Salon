@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Builder;
-
+use Illuminate\Support\Arr;
 
 class AppServiceProvider extends ServiceProvider
 {

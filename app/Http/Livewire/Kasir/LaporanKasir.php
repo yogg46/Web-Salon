@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Kasir;
+
 use App\Models\Layanan;
 use App\Models\Pembelian;
 use Livewire\WithPagination;
@@ -14,21 +15,33 @@ class LaporanKasir extends Component
     use WithPagination;
     use LivewireAlert;
 
-    public $search='';
+    public $search = '';
     public $tes = 1;
     public $select = 2;
+    public $startDate;
+    public $endDate;
     // public $rinci;
-
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
 
     public function render()
     {
 
-            $tgl =Layanan::pluck('tanggal')->toArray();
+        $tgl = Layanan::pluck('tanggal')->toArray();
+        $items = Layanan::query();
 
+        if ($this->startDate && $this->endDate) {
+            $items->whereBetween('created_at', [$this->startDate, $this->endDate]);
+        }
 
-        return view('livewire.kasir.laporan-kasir',[
-            'layanan'=>Layanan::search('tanggal', $this->search)->orderBy('created_at', 'desc')->paginate(10),
-            'pembelian'=>Pembelian::search('tanggal', $this->search)->orderBy('created_at', 'desc')->paginate(10),
+        $items = $items->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('livewire.kasir.laporan-kasir', [
+            'layanan' => Layanan::search('tanggal', $this->search)->orderBy('created_at', 'desc')->paginate(10),
+            'item' => $items,
+            'pembelian' => Pembelian::search('tanggal', $this->search)->orderBy('created_at', 'desc')->paginate(10),
             'tgl' => $tgl,
             'rinci' => Pembelian::where('id', $this->tes)->first(),
             'rinci2' => Layanan::where('id', $this->tes)->first(),
@@ -47,5 +60,4 @@ class LaporanKasir extends Component
         // $rinci = Pembelian::where('id', $id)->get();
         $this->tes = $id;
     }
-
 }
