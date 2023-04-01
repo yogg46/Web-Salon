@@ -26,7 +26,7 @@
                             <div class="restaurants">
                                 <div class="restaurants-toolbar">
                                     <div class="left">
-                                        <h3>SALON KECANTIKAN @json($cek) </h3>
+                                        <h3>SALON KECANTIKAN </h3>
                                     </div>
                                     <br>
                                     {{-- {{ var_export($cek) }} --}}
@@ -193,7 +193,7 @@
                                                                 <tr>
 
                                                                     <td class=" is-end">
-                                                                        {{ $bar[$value] }} - {{ $jumlah[$value]  }}
+                                                                        {{ $bar[$value] }}
                                                                     </td>
 
                                                                 </tr>
