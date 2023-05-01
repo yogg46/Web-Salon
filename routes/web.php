@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExportExcel;
 use App\Http\Controllers\PrintController;
 use App\Http\Controllers\userController;
 use App\Http\Livewire\Admin\Index;
@@ -12,6 +13,7 @@ use App\Http\Livewire\Kasir\JasaController;
 use App\Http\Livewire\Kasir\KasirController;
 use App\Http\Livewire\Kasir\LaporanKasir;
 use App\Http\Livewire\Kasir\Laporan2Kasir;
+use App\Http\Livewire\Kasir\Laporanfull;
 use App\Mail\SendEmail;
 use App\Models\Barang as ModelsBarang;
 use Illuminate\Support\Facades\Mail;
@@ -55,7 +57,10 @@ Route::get('/bar', [userController::class, 'index']);
 
 
 Route::get('/print/{id}-{bayar}-{kembalian}', [PrintController::class, 'index']);
+Route::get('/coba', Laporanfull::class);
 
+Route::get('/export', [ExportExcel::class, 'export'])->name('export-excel');
+Route::get('/exportall', [ExportExcel::class, 'exportall'])->name('export-excel-all');
 
 // Route::get('/send-email',function(){
 //     $data = [

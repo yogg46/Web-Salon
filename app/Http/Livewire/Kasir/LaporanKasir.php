@@ -6,6 +6,8 @@ use App\Models\Layanan;
 use App\Models\Pembelian;
 use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 use Livewire\Component;
@@ -20,31 +22,42 @@ class LaporanKasir extends Component
     public $select = 2;
     public $startDate;
     public $endDate;
+    public $selectedMonth;
+    public $selectedYear;
+    public $selectedDay;
     // public $rinci;
     public function updatingSearch()
     {
         $this->resetPage();
     }
+    public function mount()
+    {
+        // Set default values for month and year
+        $this->selectedMonth = date('m');
+        $this->selectedDay = null;
+        $this->selectedYear = date('Y');
+    }
 
     public function render()
     {
 
-        $tgl = Layanan::pluck('tanggal')->toArray();
-        $items = Layanan::query();
-
-        if ($this->startDate && $this->endDate) {
-            $items->whereBetween('created_at', [$this->startDate, $this->endDate]);
+        $tgl = DB::table('layanans')->pluck(DB::raw('YEAR(created_at)'));
+        $itemsa = Layanan::query();
+        $itemsa->whereYear('created_at', $this->selectedYear)
+            ->orderBy('created_at', 'desc');
+            
+            if ($this->selectedMonth) {
+                $itemsa->whereMonth('created_at', $this->selectedMonth);
+            }
+        if ($this->selectedDay) {
+            $itemsa->whereDay('created_at', $this->selectedDay);
         }
 
-        $items = $items->orderBy('created_at', 'desc')->paginate(10);
+        $items = $itemsa->get();
 
         return view('livewire.kasir.laporan-kasir', [
-            'layanan' => Layanan::search('tanggal', $this->search)->orderBy('created_at', 'desc')->paginate(10),
             'item' => $items,
-            'pembelian' => Pembelian::search('tanggal', $this->search)->orderBy('created_at', 'desc')->paginate(10),
-            'tgl' => $tgl,
-            'rinci' => Pembelian::where('id', $this->tes)->first(),
-            'rinci2' => Layanan::where('id', $this->tes)->first(),
+            'tanggal' => $tgl,
         ])->extends(
             'layouts.main',
             [
@@ -60,4 +73,18 @@ class LaporanKasir extends Component
         // $rinci = Pembelian::where('id', $id)->get();
         $this->tes = $id;
     }
+
+    public function export()
+{
+    $data = Layanan::all();
+
+    // dd($data);
+
+    return Excel::download(function($excel) use ($data) {
+        $excel->sheet('Sheet 1', function($sheet) use ($data) {
+            // dd($data);
+            $sheet->fromArray($data);
+        });
+    }, 'data.xlsx');
+}
 }

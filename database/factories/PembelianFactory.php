@@ -20,12 +20,14 @@ class PembelianFactory extends Factory
     {
         $petugasGudang = User::where('role', 'gudang')->pluck('id');
         $suplier = Suplier::pluck('id');
+        $waktu = fake()->dateTimeThisMonth($max = 'now','Asia/Jakarta');
 
         return [
-            'tanggal' =>  $this->faker->dateTimeBetween('now', '+1 years')->format('d-m-Y'),
+            'tanggal' =>  $waktu,
             'total' => $this->faker->numberBetween($min = 20000, $max = 1000000),
             'petugas_gudang' => $this->faker->randomElement($petugasGudang),
             'suplier_id' => $this->faker->randomElement($suplier),
+            'created_at'=>$waktu,
         ];
     }
 }

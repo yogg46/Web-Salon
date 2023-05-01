@@ -26,6 +26,12 @@ class Layanan extends Model
             ]
         ];
     }
+    protected $fillable = [
+        'tanggal',
+        'manufaktur',
+        'total',
+        'user_id'
+    ];
     public function layananRelasiUser()
     {
         return $this->belongsTo(User::class, 'user_id');

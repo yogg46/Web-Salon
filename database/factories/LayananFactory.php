@@ -18,10 +18,13 @@ class LayananFactory extends Factory
     public function definition()
     {
         $kasir = User::where('role', 'kasir')->pluck('id');
+        $tgl = fake()->dateTimeThisMonth($max = 'now','Asia/Jakarta');
+
         return [
-            'tanggal' => now()->format('d-m-Y'),
+            'tanggal' => $tgl,
             'total' => fake()->numberBetween(10000, 200000),
             'user_id' => fake()->randomElement($kasir),
+            'created_at'=> $tgl,
         ];
     }
 }

@@ -16,6 +16,13 @@ class detailLayanan extends Model
     {
         return $this->belongsTo(Jasa::class, 'jasa_id');
     }
+    protected $fillable = [
+        'jumlah',
+        'harga',
+        'subtotal',
+        'layanan_id',
+        'jasa_id'
+    ];
 
     public function detailRelasiLayanan()
     {

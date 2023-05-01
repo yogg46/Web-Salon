@@ -46,6 +46,7 @@ class KasirController extends Component
     public function mount()
     {
         $this->harga = Jasa::pluck('harga', 'id');
+        $this->harga_asli = Jasa::pluck('harga', 'id');
         $this->total = 0;
         $this->item = 0;
         // $this->jumlah[$value] = max(1, $this->jumlah[$value] ?? 1);
@@ -71,6 +72,7 @@ class KasirController extends Component
         $this->s = $id;
     }
     public $harga;
+    public $harga_asli;
 
     public function TOT($itu)
     {
@@ -126,9 +128,9 @@ class KasirController extends Component
                 'user_id' => Auth::user()->id,
             ]);
             $layanan->layananRelasiDetail()->create([
-                'harga' => $this->harga[$value],
+                'harga' => $this->harga_asli[$value],
                 'jumlah' => $this->jumlah[$value],
-                'subtotal' => $this->harga[$value] * $this->jumlah[$value],
+                'subtotal' => $this->harga[$value] ,
                 'jasa_id' => $value
             ]);
             $this->layid = $layanan->id;

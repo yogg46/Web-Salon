@@ -17,7 +17,7 @@ class SuplierFactory extends Factory
     public function definition()
     {
         return [
-            'nama_suplier' => fake()->name(),
+            'nama_suplier' => fake()->company(),
             'alamat' => fake()->address(),
         ];
     }

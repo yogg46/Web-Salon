@@ -30,11 +30,13 @@ class Pembelian extends Model
                 'format' => function () {
                     return 'FS-' . date('dmY') . '-?'; // autonumber format. '?' will be replaced with the generated number.
                 },
-                'length' => 5 // The number of digits in the autonumber
+                'length' => 3 // The number of digits in the autonumber
             ]
         ];
     }
-
+    protected $casts = [
+        'tanggal' => 'datetime',
+    ];
     public function pembelianRelasiSuplier()
     {
         return $this->belongsTo(Suplier::class, 'suplier_id');

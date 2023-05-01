@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('pembelians', function (Blueprint $table) {
             $table->id();
             $table->string('manufaktur');
-            $table->string('tanggal')->default(now()->format('d-m-Y'));
+            $table->dateTime('tanggal')->default(now());
             $table->bigInteger('total')->nullable();
             $table->unsignedBigInteger('petugas_gudang')->constrained()
                 ->onUpdate('cascade');

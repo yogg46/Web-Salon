@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Kasir;
 use App\Models\Layanan;
 use App\Models\Pembelian;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 use Livewire\Component;
@@ -16,15 +17,38 @@ class Laporan2Kasir extends Component
     public $search='';
     public $tes = 1;
     public $select = 1;
+    public $selectedMonth;
+    public $selectedYear;
+    public $selectedDay;
+
+    public function mount()
+    {
+        // Set default values for month and year
+        $this->selectedMonth = date('m');
+        $this->selectedDay = null;
+        $this->selectedYear = date('Y');
+    }
+
     public function render()
     {
-        $tgl =Pembelian::pluck('tanggal')->toArray();
+        $tgl = DB::table('pembelians')->pluck(DB::raw('YEAR(created_at)'));
+        // $tgl =Pembelian::pluck('tanggal')->toArray();
+        $itemsa = Pembelian::query();
+        $itemsa->whereYear('created_at', $this->selectedYear)
+            ->orderBy('created_at', 'desc');
+
+            if ($this->selectedMonth) {
+                $itemsa->whereMonth('created_at', $this->selectedMonth);
+            }
+        if ($this->selectedDay) {
+            $itemsa->whereDay('created_at', $this->selectedDay);
+        }
+
+        $items = $itemsa->get();
         return view('livewire.kasir.laporan2-kasir',[
-            'layanan'=>Layanan::search('tanggal', $this->search)->orderBy('created_at', 'desc')->paginate(10),
-            'pembelian'=>Pembelian::search('tanggal', $this->search)->orderBy('created_at', 'desc')->paginate(10),
-            'tgl' => $tgl,
-            'rinci' => Pembelian::where('id', $this->tes)->first(),
-            'rinci2' => Layanan::where('id', $this->tes)->first(),
+            'pembelian'=>$items,
+            'tanggal' => $tgl,
+
         ])->extends(
             'layouts.main',
             [

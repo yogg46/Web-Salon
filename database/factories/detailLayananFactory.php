@@ -20,10 +20,15 @@ class detailLayananFactory extends Factory
     {
         $jasa = Jasa::pluck('id');
         $layanan = Layanan::pluck('id');
+        $jasa = Jasa::all();
+        // $pembelian = Pembelian::pluck('id');
+        $barangItem = $this->faker->randomElement($jasa); // choose a random Barang
+        $jumlah = $this->faker->numberBetween($min = 1, $max = 4);
+        $harga = $barangItem->harga;
         return [
-            'jumlah' => fake()->numberBetween(2, 100),
-            'harga' => fake()->numberBetween(1000, 20000),
-            'subtotal' => fake()->numberBetween(2000, 200000),
+            'jumlah' => $jumlah,
+            'harga' => $harga,
+            'subtotal' =>  $harga * $jumlah,
             'layanan_id' => fake()->randomElement($layanan),
             'jasa_id' => fake()->randomElement($jasa),
         ];

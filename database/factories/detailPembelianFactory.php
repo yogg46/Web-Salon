@@ -18,13 +18,16 @@ class detailPembelianFactory extends Factory
      */
     public function definition()
     {
-        $barang = Barang::pluck('id');
+        $barang = Barang::all();
         $pembelian = Pembelian::pluck('id');
+        $barangItem = $this->faker->randomElement($barang); // choose a random Barang
+        $jumlah = $this->faker->numberBetween($min = 5, $max = 100);
+        $harga = $barangItem->harga_beli; // get the harga attribute from the chosen Barang
         return [
-            'jumlah' => $this->faker->numberBetween($min = 5, $max = 100),
-            'harga' => $this->faker->numberBetween($min = 5000, $max = 100000),
-            'subtotal' => $this->faker->numberBetween($min = 50000, $max = 1000000),
-            'barang_id' => $this->faker->randomElement($barang),
+            'jumlah' => $jumlah,
+            'harga' => $harga,
+            'subtotal' => $harga * $jumlah,
+            'barang_id' => $barangItem->id,
             'pembelian_id' => $this->faker->randomElement($pembelian),
         ];
     }
