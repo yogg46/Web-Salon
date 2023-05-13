@@ -83,27 +83,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="column is-2">
+                        {{-- <div class="column is-2">
                             <div class="field">
                                 <label>Keuntungan(%)</label>
                                 <div class="control  @error('untung.0') has-validation has-error @enderror">
                                     <input type="number" min="0" wire:model.lazy='untung.0'
                                         class="input is-primary-focus" placeholder="Keuntungan *">
-                                    {{-- <p class="help is-success">
-                                        @php
-                                            $ts = 0;
-                                        @endphp
-                                        @if ($untung)
-                                            {{ $ts = ($untung[0] / 100) * $harga[0] }}
-                                        @endif
-                                    </p> --}}
+
 
                                     @error('untung.0')
                                         <span class="error  text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="column is-2">
                             <div class="field">
                                 <label>Jumlah</label>
@@ -156,7 +149,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="column is-2">
+                            {{-- <div class="column is-2">
                                 <div class="field">
                                     <label>Keuntungan(%)</label>
                                     <div
@@ -170,7 +163,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="column is-2">
                                 <div class="field">
                                     <label>Jumlah</label>

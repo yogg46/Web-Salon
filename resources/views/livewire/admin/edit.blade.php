@@ -87,6 +87,28 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="column is-12">
+                            <div class="field">
+                                <label>Status</label>
+                                <div class="control has-icon">
+
+                                    <div class=" h-select">
+                                        <select wire:model='status' class="select w-100" style="width:800px;">
+                                            <option>Pilih Status</option>
+                                            <option {{ $status == 'aktif' ? 'selected':'' }} value="aktif">Aktif</option>
+                                            <option {{ $status == 'tidak' ? 'selected':'' }} value="tidak">Tidak Aktif</option>
+                                            {{-- <option value="gudang">Gudang</option>
+                                            <option value="bos">Owner</option> --}}
+                                        </select>
+                                    </div>
+
+
+                                </div>
+                                @error('status')
+                                    <span class="error  text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
                         {{-- <button class="button h-button is-primary is-raised">TAMBAHKAN</button> --}}
                     </div>
                 </form>

@@ -14,6 +14,7 @@ use App\Http\Livewire\Kasir\KasirController;
 use App\Http\Livewire\Kasir\LaporanKasir;
 use App\Http\Livewire\Kasir\Laporan2Kasir;
 use App\Http\Livewire\Kasir\Laporanfull;
+use App\Http\Livewire\PengeluaranLain;
 use App\Mail\SendEmail;
 use App\Models\Barang as ModelsBarang;
 use Illuminate\Support\Facades\Mail;
@@ -51,14 +52,21 @@ Route::get('/kasir', KasirController::class)->middleware('auth', 'checkRole:kasi
 Route::get('/jasa', JasaController::class)->middleware('auth', 'checkRole:kasir')->name('jasa');
 Route::get('/laporan-pemasukan', LaporanKasir::class)->middleware('auth', 'checkRole:kasir,bos')->name('laporan-pemasukan');
 Route::get('/laporan-pengeluaran', Laporan2Kasir::class)->middleware('auth', 'checkRole:kasir,bos')->name('laporan-pengeluaran');
+Route::get('/laporan-pengeluaran-lain', PengeluaranLain::class)->middleware('auth', 'checkRole:kasir,bos')->name('laporan-pengeluaran-lain');
 Route::view('/welcome', 'kasir', ['tittle' => 'Taylor']);
 // Route::view('/welcome', 'Admin.add', ['tittle' => 'Taylor']);
 Route::get('/bar', [userController::class, 'index']);
 
 
 Route::get('/print/{id}-{bayar}-{kembalian}', [PrintController::class, 'index']);
-Route::get('/coba', Laporanfull::class);
+Route::get('/laporan', Laporanfull::class);
 
+Route::get('/export-laporan-all', [ExportExcel::class, 'exportall_laporan'])->name('export-excel-laporan-all');
+Route::get('/export-laporan', [ExportExcel::class, 'export_laporan'])->name('export-excel-laporan');
+Route::get('/export-pengeluaran', [ExportExcel::class, 'export_pengeluaran'])->name('export-excel-pengeluaran');
+Route::get('/export-pengeluaran-all', [ExportExcel::class, 'exportall_pengeluaran'])->name('export-excel-pengeluaran-all');
+Route::get('/export-pengeluaran-lain', [ExportExcel::class, 'export_pengeluaran_lain'])->name('export-excel-pengeluaran-lain');
+Route::get('/export-pengeluaran-lain-all', [ExportExcel::class, 'exportall_pengeluaran_lain'])->name('export-excel-pengeluaran-lain-all');
 Route::get('/export', [ExportExcel::class, 'export'])->name('export-excel');
 Route::get('/exportall', [ExportExcel::class, 'exportall'])->name('export-excel-all');
 
@@ -73,7 +81,7 @@ Route::get('/exportall', [ExportExcel::class, 'exportall'])->name('export-excel-
 // });
 
 // Route::view('/em','layouts.mail');
-Route::get('/em', function () {
-    $data = ['name' => 'John Doe', 'password' => 'johndoe@example.com'];
-    return view('layouts.mail', ['data' => $data]);
-});
+// Route::get('/em', function () {
+//     $data = ['name' => 'John Doe', 'password' => 'johndoe@example.com'];
+//     return view('layouts.mail', ['data' => $data]);
+// });

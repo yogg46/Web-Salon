@@ -14,7 +14,7 @@
             <div class="datatable-toolbar">
                 <div class="field has-addons ">
                     <div class="control has-icon">
-                        <input wire:model="search" class="input " placeholder="Search again...">
+                        <input wire:model="search" class="input " placeholder="Cari...">
                         <div class="form-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -47,18 +47,33 @@
                                 <th>ID</th>
                                 <th>Suplier</th>
                                 <th>Alamat</th>
+                                <th>Aksi</th>
 
                             </tr>
                         </thead>
 
                         <tbody>
                             @foreach ($suplier as $k)
-                                <tr>
-                                    <td>{{ $k->no_suplier }}</td>
-                                    <td>{{ $k->nama_suplier }}</td>
-                                    <td>{{ $k->alamat }}</td>
+                            <tr>
+                                <td>{{ $k->no_suplier }}</td>
+                                <td>{{ $k->nama_suplier }}</td>
+                                <td>{{ $k->alamat }}</td>
+                                <td><button wire:click='edit({{ $k->id }})'
+                                        class="button   is-warning is-light  is-circle is-elevated is-bordered h-modal-trigger"
+                                        data-modal="edit-suplier">
+                                        <span class="icon is-small">
+                                            <i class="lnil lnil-pencil"></i>
+                                        </span>
+                                    </button>
+                                    <button wire:click='kon({{ $k->id }})'
+                                        class="button is-danger is-light is-circle is-elevated is-bordered h-modal-trigger">
+                                        <span class="icon is-small">
+                                            <i class="lnil lnil-trash-can-alt"></i>
+                                        </span>
+                                    </button>
+                                </td>
 
-                                </tr>
+                            </tr>
                             @endforeach
 
                         </tbody>
@@ -75,5 +90,23 @@
 
         </div>
     </div>
+    @push('scripts')
+    <script>
+        window.addEventListener('swal:confirmSuplier', event => {
+    swal.fire({
+            title: event.detail.title,
+            text: event.detail.text,
+            icon: event.detail.type,
+            showCancelButton: true,
+            reverseButtons: true
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+                window.livewire.emit('delete', event.detail.id);
+            }
+        });
+});
+    </script>
 
+    @endpush
 </div>

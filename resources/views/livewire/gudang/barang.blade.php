@@ -18,7 +18,7 @@
             <div class="datatable-toolbar">
                 <div class="field has-addons ">
                     <div class="control has-icon">
-                        <input wire:model="search" class="input " placeholder="Search again...">
+                        <input wire:model="search" class="input " placeholder="Cari....">
                         <div class="form-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -31,14 +31,14 @@
 
                 </div>
 
-                <div class="field is-autocomplete" wire:ignore>
+                {{-- <div class="field is-autocomplete" wire:ignore>
                     <div class="control has-icon">
                         <input id="autocomplete-barang" type="text" class="input" placeholder="Search people...">
                         <div class="form-icon">
                             <i data-feather="search"></i>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="buttons">
 
                     <button class="button h-button is-primary is-elevated h-modal-trigger" data-modal="add-barang">
@@ -60,7 +60,7 @@
                                 <th>ID</th>
                                 <th>Nama barang</th>
                                 <th>Harga beli</th>
-                                <th>Harga Jual</th>
+                                {{-- <th>Harga Jual</th> --}}
                                 <th>Stok</th>
                                 {{-- <th>Tanggal</th> --}}
                             </tr>
@@ -72,7 +72,7 @@
                                     <td>{{ $v->no_barang }}</td>
                                     <td>{{ $v->nama_barang }}</td>
                                     <td>Rp. {{ $v->harga_beli }}</td>
-                                    <td>Rp. {{ $v->harga_jual }}</td>
+                                    {{-- <td>Rp. {{ $v->harga_jual }}</td> --}}
                                     <td>{{ $v->stock }}</td>
                                     {{-- <td>01-10-2022</td> --}}
                                 </tr>

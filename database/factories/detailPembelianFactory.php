@@ -21,7 +21,7 @@ class detailPembelianFactory extends Factory
         $barang = Barang::all();
         $pembelian = Pembelian::pluck('id');
         $barangItem = $this->faker->randomElement($barang); // choose a random Barang
-        $jumlah = $this->faker->numberBetween($min = 5, $max = 100);
+        $jumlah = $this->faker->numberBetween($min = 1, $max = 10);
         $harga = $barangItem->harga_beli; // get the harga attribute from the chosen Barang
         return [
             'jumlah' => $jumlah,

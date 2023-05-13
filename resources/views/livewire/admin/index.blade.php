@@ -48,7 +48,7 @@
                         <option value="aktif">
                             Aktif
                         </option>
-                        <option value="tidak aktif">
+                        <option value="tidak">
                             Tidak Aktif
                         </option>
 
@@ -109,7 +109,7 @@
                         </td>
                         <td class=" text-center">
                             <span class="tag {{ $key->status == 'aktif' ? 'is-success' : 'is-danger' }}  is-rounded"
-                                style="text-transform: capitalize;">{{ $key->status }}</span>
+                                style="text-transform: capitalize;">{{ $key->status == 'aktif' ? 'Aktif' : 'Tidak Aktif' }} </span>
                         </td>
 
 

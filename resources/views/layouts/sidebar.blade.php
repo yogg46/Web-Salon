@@ -113,6 +113,12 @@
                     </div>
                     <ul>
                         <li>
+                            <a class="is-submenu" href="/laporan">
+                                <i class="lnil lnil-book"></i>
+                                <span>Laporan </span>
+                            </a>
+                        </li>
+                        <li>
                             <a class="is-submenu" href="/laporan-pemasukan">
                                 <i class="lnil lnil-book"></i>
                                 <span>Laporan Pemasukan</span>
@@ -122,6 +128,12 @@
                             <a class="is-submenu" href="/laporan-pengeluaran">
                                 <i class="lnil lnil-book"></i>
                                 <span>Laporan Pengeluaran</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="is-submenu" href="/laporan-pengeluaran-lain">
+                                <i class="lnil lnil-book"></i>
+                                <span>Laporan Pengeluaran Lain</span>
                             </a>
                         </li>
 
@@ -205,18 +217,33 @@
                         </a>
                     </div>
                     <ul>
-                        <li>
-                            <a class="is-submenu" href="/laporan-pemasukan">
-                                <i class="lnil  lnil-book"></i>
-                                <span>Laporan Pemasukan</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="is-submenu" href="/laporan-pengeluaran">
-                                <i class="lnil lnil-book"></i>
-                                <span>Laporan Pengeluaran</span>
-                            </a>
-                        </li>
+                        <ul>
+                            <li>
+                                <a class="is-submenu" href="/laporan">
+                                    <i class="lnil lnil-book"></i>
+                                    <span>Laporan </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="is-submenu" href="/laporan-pemasukan">
+                                    <i class="lnil lnil-book"></i>
+                                    <span>Laporan Pemasukan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="is-submenu" href="/laporan-pengeluaran">
+                                    <i class="lnil lnil-book"></i>
+                                    <span>Laporan Pengeluaran</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="is-submenu" href="/laporan-pengeluaran-lain">
+                                    <i class="lnil lnil-book"></i>
+                                    <span>Laporan Pengeluaran Lain</span>
+                                </a>
+                            </li>
+
+                        </ul>
 
                     </ul>
                 </li>

@@ -62,7 +62,7 @@
             <div class="control has-icons-left">
                 <div class="select">
                     <select wire:model="selectedYear"  class="datatable-filter datatable-select form-control" id="year">
-
+                        <option value="">Semua Tahun</option>
                         @foreach ( $tanggal->unique() as $key )
                         <option value="{{ $key }}">{{ $key }}</option>
                         @endforeach
@@ -128,7 +128,7 @@
                                     {{ $v->manufaktur }}
                                 </td>
                                 <td rowspan="{{ count($v->layananRelasiDetail)+1 }}">
-                                    {{ $v->tanggal }}
+                                    {{ $v->tanggal->format('d-m-Y') }}
                                 </td>
                                 <td rowspan="{{ count($v->layananRelasiDetail)+1 }}">
                                     {{ $v->layananRelasiUser->name }}

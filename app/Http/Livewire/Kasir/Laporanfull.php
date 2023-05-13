@@ -4,86 +4,135 @@ namespace App\Http\Livewire\Kasir;
 
 use App\Models\Layanan;
 use App\Models\Pembelian;
+use App\Models\pengeluaranlain;
 use Livewire\Component;
 use Illuminate\Support\Collection;
 
 class Laporanfull extends Component
 {
-    public $c=[];
+    public $c = [];
     public $selectedYear;
     public $selectedMonth;
     public $selectedDay;
     public function mount()
     {
         // Set default values for month and year
-        $this->selectedMonth = null;
+        $this->selectedMonth = date('m');
         $this->selectedDay = null;
         $this->selectedYear = date('Y');
     }
     public function render()
     {
-        $pembelianItems = Pembelian::query()
-            ->whereYear('created_at', $this->selectedYear)
-            ->when($this->selectedMonth, function($query) {
-                return $query->whereMonth('created_at', $this->selectedMonth);
-            })
-            ->when($this->selectedDay, function($query) {
-                return $query->whereDay('created_at', $this->selectedDay);
-            })
-            ->orderBy('created_at', 'desc')
-            ->get();
+        // $tgl = DB::table('layanans')->pluck(DB::raw('YEAR(created_at)'));
+        // $itemsa = Layanan::query();
+        // $itemsa->whereYear('created_at', $this->selectedYear)
+        //     ->orderBy('created_at', 'desc');
 
-        $layananItems = Layanan::query()
-            ->whereYear('created_at', $this->selectedYear)
-            ->when($this->selectedMonth, function($query) {
-                return $query->whereMonth('created_at', $this->selectedMonth);
-            })
-            ->when($this->selectedDay, function($query) {
-                return $query->whereDay('created_at', $this->selectedDay);
-            })
-            ->orderBy('created_at', 'desc')
-            ->get();
+        // if ($this->selectedMonth) {
+        //     $itemsa->whereMonth('created_at', $this->selectedMonth);
+        // }
+        // if ($this->selectedDay) {
+        //     $itemsa->whereDay('created_at', $this->selectedDay);
+        // }
 
-        $mergedItems = collect([]);
+        // $items = $itemsa->get();
 
-        foreach ($pembelianItems as $pembelianItem) {
-            $barang =[];
-            foreach ($pembelianItem->pembelianRelasiDetail as $key) {
-                array_push($barang, $key->detailRelasiBarang->nama_barang.' x '.$key->jumlah);
+        $penjualan_jasa = Layanan::with('layananRelasiDetail')
+            ->whereYear('created_at', $this->selectedYear);
+        if ($this->selectedMonth) {
+            $penjualan_jasa->whereMonth('created_at', $this->selectedMonth);
+        }
+        if ($this->selectedDay) {
+            $penjualan_jasa->whereDay('created_at', $this->selectedDay);
+        }
+        $masuk = $penjualan_jasa->get();
+
+        $pembelian_barang = Pembelian::with('pembelianRelasiDetail')
+            ->whereYear('created_at', $this->selectedYear);
+        if ($this->selectedMonth) {
+            $pembelian_barang->whereMonth('created_at', $this->selectedMonth);
+        }
+        if ($this->selectedDay) {
+            $pembelian_barang->whereDay('created_at', $this->selectedDay);
+        }
+        $keluar1 = $pembelian_barang->get();
+
+
+        $lain = pengeluaranlain::whereYear('created_at', $this->selectedYear);
+        if ($this->selectedMonth) {
+            $lain->whereMonth('created_at', $this->selectedMonth);
+        }
+        if ($this->selectedDay) {
+            $lain->whereDay('created_at', $this->selectedDay);
+        }
+        $keluar2 = $lain->get();
+
+
+        $hasil = [];
+
+        foreach ($masuk as $pj) {
+            $tgl = $pj->tanggal->format('Y-m-d');
+
+            $keterangan = [];
+            foreach ($pj->layananRelasiDetail as $key) {
+                $keterangan[] = $key->detailRelasiJasa->jasaRelasiKategori->kategori .' - '.$key->detailRelasiJasa->nama_jasa . ' x ' . $key->jumlah;
             }
-            $mergedItems->push([
-                'TANGGAL' => $pembelianItem->created_at->format('d-m-Y'),
-                'KASIR' => null,
-                'LAYANAN' => null,
-                'JUMLAH_LAYANAN' => null,
-                'SUBTOTAL_LAYANAN' => null,
-                'PETUGAS GUDANG' => $pembelianItem->pembelianRelasiUser->name,
-                'SUPLIER' => $pembelianItem->pembelianRelasiSuplier->nama_suplier,
-                'BARANG' => implode(" ",$barang) ,
-                'JUMLAH_BARANG' => $pembelianItem->pembelianRelasiDetail->sum('jumlah'),
-                'SUBTOTAL_BARANG' => $pembelianItem->subtotal,
-            ]);
+            $keterangan_string = implode(", ", $keterangan);
+            $hasil[$tgl][] = [
+                'Tanggal' => $tgl,
+                'pegawai' => $pj->layananRelasiUser->name,
+                'keterangan' => $keterangan_string,
+                'kas_masuk'=> $pj->layananRelasiDetail->sum('subtotal'),
+                'kas_keluar'=> null,
+
+            ];
         }
 
-        foreach ($layananItems as $layananItem) {
-            $mergedItems->push([
-                'TANGGAL' => $layananItem->created_at->format('d-m-Y'),
-                'KASIR' => $layananItem->kasir,
-                'LAYANAN' => $layananItem->layanan,
-                'JUMLAH_LAYANAN' => $layananItem->jumlah,
-                'SUBTOTAL_LAYANAN' => $layananItem->subtotal,
-                'PETUGAS GUDANG' => null,
-                'SUPLIER' => null,
-                'BARANG' => null,
-                'JUMLAH_BARANG' => null,
-                'SUBTOTAL_BARANG' => null,
-            ]);
+        foreach ($keluar1 as $pb) {
+            $tgl = $pb->tanggal->format('Y-m-d');
+            $keterangan = [];
+            foreach ($pb->pembelianRelasiDetail as $key) {
+                $keterangan[] =$key->detailRelasiBarang->nama_barang . ' x ' . $key->jumlah;
+            }
+            $keterangan_string = implode(", ", $keterangan);
+            $hasil[$tgl][] = [
+                'Tanggal' => $tgl,
+                'pegawai' => $pb->pembelianRelasiUser->name,
+                'keterangan' => $keterangan_string,
+                'kas_masuk'=> null,
+                'kas_keluar'=> $pb->pembelianRelasiDetail->sum('subtotal')
+
+            ];
         }
 
-        $sortedItems = $mergedItems->sortByDesc('TANGGAL');
+        foreach ($keluar2 as $pl) {
+            $tgl = $pl->tanggal->format('Y-m-d');
+
+            $hasil[$tgl][] = [
+                'Tanggal' => $tgl,
+                'pegawai' => $pl->kasir->name,
+                'keterangan' => $pl->keterangan,
+                'kas_masuk'=> null,
+                'kas_keluar'=> $pl->total,
+            ];
+        }
+
+        $hasil= collect($hasil)->sortBy(function ($item, $key) {
+            return $key;
+        })->all();
+        // $hasil= collect($hasil)->sortByDesc(function ($item, $key) {
+        //     return $key;
+        // })->all();
+
+        $years = collect($hasil)->keys()->map(function ($date) {
+            return substr($date, 0, 4);
+        })->unique()->values()->all();
+
 
         return view('livewire.kasir.laporanfull', [
-            'items' => $sortedItems,
+            'items' => $hasil,
+            'tanggal'=>$years
+
         ])->extends(
             'layouts.main',
             [

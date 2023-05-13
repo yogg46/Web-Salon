@@ -26,13 +26,15 @@ class Pengambilan extends Model
             ]
         ];
     }
-
+    protected $casts = [
+        'tanggal' => 'datetime',
+    ];
 
     public function pengambilanRelasiUser()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    
+
     public function pengambilanRelasiBarang()
     {
         return $this->belongsTo(Barang::class, 'barang_id');

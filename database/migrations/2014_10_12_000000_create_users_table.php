@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->default(bcrypt('password'));
             $table->enum('role', ['admin', 'kasir', 'gudang', 'bos']);
-            $table->enum('status', ['aktif', 'tidak aktif'])->default('aktif');
+            $table->enum('status', ['aktif', 'tidak'])->default('aktif');
             $table->rememberToken();
             $table->timestamps();
         });

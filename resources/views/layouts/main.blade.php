@@ -766,12 +766,12 @@
         <script src="/assets/js/widgets.js" async></script>
         <script src="assets/js/touch.js" async></script>
         <script src="assets/js/apps-1.js" async></script>
-        <script src="assets/js/saas-billing.js" async></script>
+        {{-- <script src="assets/js/saas-billing.js" async></script> --}}
         <script src="assets/js/syntax.js" async></script>
 
         <!-- Additional Features -->
         <script src="/assets/js/touch.js" async></script>
-        <script type="text/javascript">
+        {{-- <script type="text/javascript">
             window.livewire.on('save123', () => {
                 $('#add-barang').modal('is-vhidden');
             })
@@ -784,7 +784,7 @@
             window.addEventListener('closeModal', event => {
                 $("#add-barang").modal('is-vhidden');
             })
-        </script>
+        </script> --}}
         @livewireScripts
 
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -67,7 +67,7 @@ class BarangFactory extends Factory
             'nama_barang' => $this->faker->randomElement($barangs),
             'harga_beli' => $hargaMenu,
             'harga_jual' => $hargaMenu,
-            'stock' => $this->faker->numberBetween($min = 10, $max = 100),
+            'stock' => $this->faker->numberBetween($min = 1, $max = 10),
         ];
     }
 }

@@ -14,7 +14,7 @@
 
     <tbody>
         @php
-            $no = 1;
+        $no = 1;
         @endphp
         @foreach ($layanans as $v)
         <tr>
@@ -26,11 +26,11 @@
                 {{ $v->manufaktur }}
             </td>
             <td rowspan="{{ count($v->layananRelasiDetail)+1 }}">
-                {{ $v->tanggal }}
+                {{ $v->tanggal->format('d-m-Y') }}
             </td>
             <td rowspan="{{ count($v->layananRelasiDetail)+1 }}">
                 {{ $v->layananRelasiUser->name }}
-            </td >
+            </td>
         </tr>
         @foreach ($v->layananRelasiDetail as $items)
         <tr>
@@ -54,10 +54,13 @@
         <tr>
             <th colspan="4"></th>
             <th>Total</th>
-            <th>{{ collect($layanans)->sum(function($layanan) { return $layanan->layananRelasiDetail->sum('jumlah'); }) }}</th>
+            <th>{{ collect($layanans)->sum(function($layanan) { return
+            $layanan->layananRelasiDetail->sum('jumlah'); })
+                }}</th>
 
             {{-- <th>Suplier</th> --}}
-            <td><b>{{ 'Rp. '.number_format(collect($layanans)->sum(function($layanan) { return $layanan->layananRelasiDetail->sum('subtotal'); }), 0, ',', '.') }}</b></td>
+            <td><b>{{ 'Rp. '.number_format(collect($layanans)->sum(function($layanan) { return
+                    $layanan->layananRelasiDetail->sum('subtotal'); }), 0, ',', '.') }}</b></td>
             {{-- <th>Rincian</th> --}}
         </tr>
     </tfoot>

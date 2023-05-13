@@ -71,20 +71,20 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="buttons">
-                    <a class="button h-button is-success  is-elevated" href="{{ route('export-excel-pengeluaran') }}" target="_blank">Export Excel Perbulan </a>
-                    <a class="button h-button is-success  is-elevated" href="{{ route('export-excel-pengeluaran-all') }}" target="_blank">Export Excel</a>
 
-        </div>
-                {{-- <div class="buttons">
+                    <a class="button h-button is-success  is-elevated" href="{{ route('export-excel-pengeluaran-lain') }}"
+                        target="_blank">Export Excel Perbulan </a>
+                    <a class="button h-button is-success  is-elevated" href="{{ route('export-excel-pengeluaran-lain-all') }}"
+                        target="_blank">Export Excel</a>
+                    <a class="button h-button is-primary  is-elevated h-modal-trigger" data-modal="add-pengeluaran"
+                        target="_blank">Tambah Pengeluaran </a>
 
-                    <button class="button h-button is-primary is-elevated h-modal-trigger" data-modal="add-barang">
-                        <span class="icon">
-                            <i aria-hidden="true" class="fas fa-plus"></i>
-                        </span>
-                        <span>Tambah Stok</span>
-                    </button>
-                </div> --}}
+                </div>
+
+
+
             </div>
 
             <div class="page-content-inner is-webapp">
@@ -97,14 +97,13 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Manufaktur</th>
-                                <th style="width: 13%;">tanggal</th>
-                                <th>Petugas Gudang</th>
-                                <th>Suplier</th>
-                                <th>Barang</th>
-                                <th>Jumlah</th>
-                                <th style="width: 15%;">Subtotal</th>
-                                {{-- <th>Rincian</th> --}}
+                                {{-- <th>Manufaktur</th> --}}
+                                <th>tanggal</th>
+                                <th>Keterangan</th>
+                                <th>Kasir</th>
+                                <th>Subtotal</th>
+
+
                             </tr>
                         </thead>
                         @php
@@ -113,59 +112,106 @@
                         <tbody>
                             @foreach ($pembelian as $v)
                             <tr>
-                                <td rowspan="{{ count($v->pembelianRelasiDetail)+1 }}">{{ $no++ }}</td>
-                                <td rowspan="{{ count($v->pembelianRelasiDetail)+1 }}">{{ $v->manufaktur }}</td>
-                                <td rowspan="{{ count($v->pembelianRelasiDetail)+1 }}">{{ $v->tanggal->format('d-m-Y')
-                                    }}</td>
-                                <td rowspan="{{ count($v->pembelianRelasiDetail)+1 }}">{{ $v->pembelianRelasiUser->name
-                                    }}</td>
-                                <td rowspan="{{ count($v->pembelianRelasiDetail)+1 }}">{{
-                                    $v->pembelianRelasiSuplier->nama_suplier }}</td>
-                                {{-- <td>Rp. {{ $v->total }}</td> --}}
+                                <td>
+                                    {{ $no++ }}
+                                </td>
+                                <td>
+                                    {{ $v->tanggal->format('d-m-Y') }}
+                                </td>
+                                <td>
+                                    {{ $v->keterangan }}
+                                </td>
+                                <td>
+                                    {{ $v->kasir->name }}
+                                </td>
+                                <td>
+                                    {{ 'Rp. '. number_format($v->total, 0, ',', '.') }}
+                                </td>
 
                             </tr>
-                            @foreach ($v->pembelianRelasiDetail as $items)
-                            <tr>
-                                <td>
-                                    {{ $items->detailRelasiBarang->nama_barang }}
-                                </td>
-                                <td>
-                                    {{ $items->jumlah }}
-                                </td>
-                                <td>
-                                    Rp. {{number_format( $items->subtotal) }}
-                                </td>
-                            </tr>
-                            @endforeach
+
                             @endforeach
 
                         </tbody>
                         <tfoot>
-                            {{-- <th colspan="5">
-                            </th> --}}
-                            <th colspan="6" style="text-align: center">Total</th>
-                            <th>{{ $pembelian->sum(function($layanan) { return
-                                $layanan->pembelianRelasiDetail->sum('jumlah'); }) }}</th>
-                            <th>{{ 'Rp. '.number_format($pembelian->sum(function($layanan) { return
-                                $layanan->pembelianRelasiDetail->sum('subtotal'); }), 0, ',', '.') }}</th>
+                            <th colspan="3">
+
+                            </th>
+                            <th>Total</th>
+                            <th>{{'Rp. '. number_format($pembelian->sum('total'), 0, ',', '.') }}</th>
                         </tfoot>
                     </table>
 
                 </div>
 
-                {{-- <nav class="w-full sm:w-auto sm:mr-auto"> --}}
-
-
-                    {{-- </nav> --}}
-
-
-
-
-
 
 
             </div>
 
+        </div>
+    </div>
+
+    <div wire:ignore.self id="add-pengeluaran" class="modal h-modal">
+        <div class="modal-background  h-modal-close"></div>
+        <div class="modal-content">
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <h3>Tambah Pengeluaran Lain</h3>
+                    <button wire:ignore class="h-modal-close ml-auto" aria-label="close">
+                        <i data-feather="x"></i>
+                    </button>
+                </header>
+                <div class="modal-card-body">
+                    <form wire:submit.prevent="simpan()">
+
+                        <div class="inner-content">
+
+                            <div class="columns is-multiline">
+                                <div class="column is-8">
+
+                                    <div class="field is-autocomplete">
+
+                                        <label>Keterangan </label>
+                                        <div class="control  @error('keterangan') has-validation has-error @enderror">
+                                            <input wire:model='keterangan' class="input is-primary-focus"
+                                                placeholder="Keterangan *">
+                                            @error('keterangan')
+                                            <span class="error  text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="column is-4">
+
+                                    <div class="field is-autocomplete">
+
+                                        <label>Total </label>
+                                        <div class="control  @error('total') has-validation has-error @enderror">
+                                            <input wire:model='total' type="number" min="1"
+                                                class="input is-primary-focus" placeholder="Total *">
+                                            @error('total')
+                                            <span class="error  text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-card-foot is-end">
+                    <a class="button h-button is-rounded h-modal-close">Batal</a>
+                    <button wire:click.prevent="simpan()" type="submit"
+                        class="button h-button is-primary is-raised is-rounded">Simpan</button>
+                </div>
+                </form>
+
+            </div>
         </div>
     </div>
 </div>

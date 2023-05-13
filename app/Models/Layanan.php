@@ -32,6 +32,9 @@ class Layanan extends Model
         'total',
         'user_id'
     ];
+    protected $casts = [
+        'tanggal' => 'datetime',
+    ];
     public function layananRelasiUser()
     {
         return $this->belongsTo(User::class, 'user_id');

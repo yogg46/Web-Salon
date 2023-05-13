@@ -24,7 +24,7 @@ class Index extends Component
     public $select;
     public $select2;
     public $name;
-    // public $username;
+    public $status;
     public $email;
     public $role;
     public $hide;
@@ -33,7 +33,10 @@ class Index extends Component
     protected $listeners = ['delete', 'resetpass'];
 
     public $cc = '';
-
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
 
     protected $rules = [
         'name' => 'required|min:6|regex:/^[a-zA-Z ]*$/',
@@ -45,14 +48,36 @@ class Index extends Component
     public function render()
     {
 
+        if (!$this->select2) {
+            $Users = User::search('name', $this->search)
+                // ->whereLike('email', $this->search)
+                ->search('role', $this->select)
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        } elseif ($this->select2 && $this->select) {
+            $Users = User::where('status', $this->select2)
+                ->where('role', $this->select)
+                ->search('name', $this->search)
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        } elseif ($this->select2) {
+            $Users = User::where('status', $this->select2)
+                ->search('name', $this->search)
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        } else {
+            $Users = User::where('role', $this->select)
+                ->search('name', $this->search)
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        }
+
+
+
 
         return view('livewire.admin.index', [
 
-            'user' => User::search('name', $this->search)
-                ->search('role', $this->select)
-                ->search('status', $this->select2)
-                ->orderBy('created_at', 'desc')
-                ->paginate(10),
+            'user' => $Users,
 
 
         ])
@@ -122,7 +147,7 @@ class Index extends Component
     public function resetInput()
     {
         $this->name = null;
-        // $this->username = null;
+        $this->status = null;
         $this->email = null;
         $this->role = null;
         $this->isclose();
@@ -148,6 +173,7 @@ class Index extends Component
 
         $this->alert('success', 'User ' . $User->name . ' Berhasil Dihapus');
     }
+
     public function edit($id)
     {
         $User = User::where('id', $id)->first();
@@ -162,6 +188,7 @@ class Index extends Component
             'name' => 'required|min:6|regex:/^[a-zA-Z ]*$/',
             'email' => 'required|email',
             'role' => 'required',
+            'status' => 'required',
         ]);
         if ($this->ids) {
             $User = User::find($this->ids);
@@ -169,6 +196,7 @@ class Index extends Component
                 'name' => $this->name,
                 'email' => $this->email,
                 'role' => $this->role,
+                'status' => $this->status,
             ]);
 
             // session()->flash('message', 'User Berhasil Diupdate.');
@@ -192,7 +220,7 @@ class Index extends Component
         $User = User::find($this->ids);
         $pss =  Str::random(20);
         $User->update([
-            'status' => 1,
+            'status' => 'aktif',
             'password' =>  Hash::make($pss),
         ]);
         $data = [
