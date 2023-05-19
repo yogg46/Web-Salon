@@ -72,8 +72,17 @@
                     </div>
                 </div>
                 <div class="buttons">
-                    <a class="button h-button is-success  is-elevated" href="{{ route('export-excel-pengeluaran') }}" target="_blank">Export Excel Perbulan </a>
-                    <a class="button h-button is-success  is-elevated" href="{{ route('export-excel-pengeluaran-all') }}" target="_blank">Export Excel</a>
+
+                    <a class="button h-button is-success  is-elevated"
+                        href="{{ route('export-excel-pengeluaran-lain') }}" target="_blank">Export Bulan {{
+                        $selectedMonth == '01' ? 'Januari' : ($selectedMonth == '02' ? 'Februari' : ($selectedMonth == '03' ?
+                        'Maret' : ($selectedMonth == '04' ? 'April' : ($selectedMonth == '05' ? 'Mei' : ($selectedMonth ==
+                        '06' ? 'Juni' : ($selectedMonth == '07' ? 'Juli' : ($selectedMonth == '08' ? 'Agustus' :
+                        ($selectedMonth == '09' ? 'September' : ($selectedMonth == '10' ? 'Oktober' : ($selectedMonth == '11'
+                        ? 'November' : 'Desember')))))))))) }}
+                    </a>
+                    <a class="button h-button is-success  is-elevated" href="{{ route('export-excel-pengeluaran') }}" target="_blank">Export Perbulan </a>
+                    <a class="button h-button is-success  is-elevated" href="{{ route('export-excel-pengeluaran-all') }}" target="_blank">Export </a>
 
         </div>
                 {{-- <div class="buttons">

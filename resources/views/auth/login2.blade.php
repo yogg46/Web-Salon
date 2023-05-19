@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
 
 </head>
 
@@ -43,8 +43,7 @@
                                 <div class="container">
                                     <div class="columns">
                                         <div class="column">
-                                            <img class="hero-image " src="/assets/img/logos/logo/logo1.png"
-                                                alt="">
+                                            <img class="hero-image " src="/assets/img/logos/logo/logo1.png" alt="">
 
                                         </div>
                                     </div>
@@ -72,9 +71,8 @@
                                     {{ csrf_field() }}
 
                                     <div class="control has-validation">
-                                        <input id="email" type="email" class="input" placeholder=""
-                                            name="email" value="{{ old('email') }}" required autocomplete="email"
-                                            autofocus>
+                                        <input id="email" type="email" class="input" placeholder="" name="email"
+                                            value="{{ old('email') }}" required autocomplete="email" autofocus>
                                         <small class="error-text">This is a required field</small>
                                         <div class="auth-label">Email</div>
                                         <div class="auth-icon">
@@ -91,9 +89,9 @@
                                             </div>
                                         </div>
                                         @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
                                     <div class="control has-validation">
@@ -104,16 +102,16 @@
                                             <i class="lnil lnil-lock-alt"></i>
                                         </div>
                                         @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
 
                                     <div class="control is-flex">
                                         <label class="remember-toggle">
-                                            <input type="checkbox" name="remember" id="remember"
-                                                {{ old('remember') ? 'checked' : '' }}>
+                                            <input type="checkbox" name="remember" id="remember" {{ old('remember')
+                                                ? 'checked' : '' }}>
                                             <span class="toggler">
                                                 <span class="active">
                                                     <i data-feather="check"></i>
@@ -123,7 +121,7 @@
                                                 </span>
                                             </span>
                                         </label>
-                                        <div class="remember-me" >Ingat Saya</div>
+                                        <div class="remember-me">Ingat Saya</div>
                                     </div>
                                     <div class="button-wrap has-help">
                                         <button id="login-submit" type="submit"

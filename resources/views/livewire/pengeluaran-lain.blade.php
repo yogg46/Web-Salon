@@ -3,13 +3,13 @@
     <div class="page-content-wrapper">
         <div class="page-content is-relative">
 
-            <div class="page-title has-text-centered is-webapp">
+            {{-- <div class="page-title has-text-centered is-webapp">
 
                 <div class="title-wrap">
                     <h1 class="title is-4"></h1>
                 </div>
 
-            </div>
+            </div> --}}
 
             <div class="datatable-toolbar">
 
@@ -74,12 +74,20 @@
 
                 <div class="buttons">
 
+                    <a class="button h-button is-success  is-elevated"
+                        href="{{ route('export-excel-pengeluaran-lain') }}" target="_blank">Export Bulan {{
+                        $selectedMonth == '01' ? 'Januari' : ($selectedMonth == '02' ? 'Februari' : ($selectedMonth == '03' ?
+                        'Maret' : ($selectedMonth == '04' ? 'April' : ($selectedMonth == '05' ? 'Mei' : ($selectedMonth ==
+                        '06' ? 'Juni' : ($selectedMonth == '07' ? 'Juli' : ($selectedMonth == '08' ? 'Agustus' :
+                        ($selectedMonth == '09' ? 'September' : ($selectedMonth == '10' ? 'Oktober' : ($selectedMonth == '11'
+                        ? 'November' : 'Desember')))))))))) }}
+                    </a>
                     <a class="button h-button is-success  is-elevated" href="{{ route('export-excel-pengeluaran-lain') }}"
-                        target="_blank">Export Excel Perbulan </a>
+                        target="_blank">Export  Perbulan </a>
                     <a class="button h-button is-success  is-elevated" href="{{ route('export-excel-pengeluaran-lain-all') }}"
-                        target="_blank">Export Excel</a>
+                        target="_blank">Export </a>
                     <a class="button h-button is-primary  is-elevated h-modal-trigger" data-modal="add-pengeluaran"
-                        target="_blank">Tambah Pengeluaran </a>
+                        target="_blank">Tambah  </a>
 
                 </div>
 
