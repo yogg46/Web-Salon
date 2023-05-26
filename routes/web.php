@@ -63,11 +63,18 @@ Route::get('/laporan', Laporanfull::class);
 
 Route::get('/export-laporan-all', [ExportExcel::class, 'exportall_laporan'])->name('export-excel-laporan-all');
 Route::get('/export-laporan', [ExportExcel::class, 'export_laporan'])->name('export-excel-laporan');
+Route::get('/export-laporan/{id}', [ExportExcel::class, 'exportbulan_laporan'])->name('export-excel-laporan-bulan');
+
+Route::get('/export-pengeluaran/{id}', [ExportExcel::class, 'exportbulan_pengeluaran'])->name('export-excel-pengeluaran-bulan');
 Route::get('/export-pengeluaran', [ExportExcel::class, 'export_pengeluaran'])->name('export-excel-pengeluaran');
 Route::get('/export-pengeluaran-all', [ExportExcel::class, 'exportall_pengeluaran'])->name('export-excel-pengeluaran-all');
+
+Route::get('/export-pengeluaran-lain/{id}', [ExportExcel::class, 'exportbulan_pengeluaran_lain'])->name('export-excel-pengeluaran-lain-bulan');
 Route::get('/export-pengeluaran-lain', [ExportExcel::class, 'export_pengeluaran_lain'])->name('export-excel-pengeluaran-lain');
 Route::get('/export-pengeluaran-lain-all', [ExportExcel::class, 'exportall_pengeluaran_lain'])->name('export-excel-pengeluaran-lain-all');
+
 Route::get('/export', [ExportExcel::class, 'export'])->name('export-excel');
+Route::get('/export/{id}', [ExportExcel::class, 'exportbulan'])->name('export-bulan-excel');
 Route::get('/exportall', [ExportExcel::class, 'exportall'])->name('export-excel-all');
 
 // Route::get('/send-email',function(){

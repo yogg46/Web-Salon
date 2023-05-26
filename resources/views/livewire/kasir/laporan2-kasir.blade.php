@@ -35,18 +35,18 @@
                             <select wire:model="selectedMonth" class="datatable-filter datatable-select form-control"
                                 id="month">
                                 <option value="">Semua Bulan</option>
-                                <option value="01">January</option>
-                                <option value="02">February</option>
-                                <option value="03">March</option>
+                                <option value="01">Januari</option>
+                                <option value="02">Februari</option>
+                                <option value="03">Maret</option>
                                 <option value="04">April</option>
-                                <option value="05">May</option>
-                                <option value="06">June</option>
-                                <option value="07">July</option>
-                                <option value="08">August</option>
+                                <option value="05">Mei</option>
+                                <option value="06">Juni</option>
+                                <option value="07">Juli</option>
+                                <option value="08">Agustus</option>
                                 <option value="09">September</option>
-                                <option value="10">October</option>
+                                <option value="10">Oktober</option>
                                 <option value="11">November</option>
-                                <option value="12">December</option>
+                                <option value="12">Desember</option>
                             </select>
                         </div>
                         <div class="icon is-small is-left">
@@ -74,17 +74,23 @@
                 <div class="buttons">
 
                     <a class="button h-button is-success  is-elevated"
-                        href="{{ route('export-excel-pengeluaran-lain') }}" target="_blank">Export Bulan {{
-                        $selectedMonth == '01' ? 'Januari' : ($selectedMonth == '02' ? 'Februari' : ($selectedMonth == '03' ?
-                        'Maret' : ($selectedMonth == '04' ? 'April' : ($selectedMonth == '05' ? 'Mei' : ($selectedMonth ==
+                        href="{{ route('export-excel-pengeluaran-bulan',$selectedMonth) }}" target="_blank">Export Bulan
+                        {{
+                        $selectedMonth == '01' ? 'Januari' : ($selectedMonth == '02' ? 'Februari' : ($selectedMonth ==
+                        '03' ?
+                        'Maret' : ($selectedMonth == '04' ? 'April' : ($selectedMonth == '05' ? 'Mei' : ($selectedMonth
+                        ==
                         '06' ? 'Juni' : ($selectedMonth == '07' ? 'Juli' : ($selectedMonth == '08' ? 'Agustus' :
-                        ($selectedMonth == '09' ? 'September' : ($selectedMonth == '10' ? 'Oktober' : ($selectedMonth == '11'
+                        ($selectedMonth == '09' ? 'September' : ($selectedMonth == '10' ? 'Oktober' : ($selectedMonth ==
+                        '11'
                         ? 'November' : 'Desember')))))))))) }}
                     </a>
-                    <a class="button h-button is-success  is-elevated" href="{{ route('export-excel-pengeluaran') }}" target="_blank">Export Perbulan </a>
-                    <a class="button h-button is-success  is-elevated" href="{{ route('export-excel-pengeluaran-all') }}" target="_blank">Export </a>
+                    <a class="button h-button is-success  is-elevated" href="{{ route('export-excel-pengeluaran') }}"
+                        target="_blank">Export Perbulan </a>
+                    <a class="button h-button is-success  is-elevated"
+                        href="{{ route('export-excel-pengeluaran-all') }}" target="_blank">Export </a>
 
-        </div>
+                </div>
                 {{-- <div class="buttons">
 
                     <button class="button h-button is-primary is-elevated h-modal-trigger" data-modal="add-barang">
