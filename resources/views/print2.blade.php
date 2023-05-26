@@ -20,7 +20,7 @@
         }
 
         .bill {
-            width: 200px;
+            width: 300px;
             /* box-shadow: 0 0 3px #aaa; */
             box-sizing: border-box;
         }
@@ -35,17 +35,23 @@
 
         .table {
             border-collapse: collapse;
-            width: 100%;
+            /* width: 100%; */
+            /* table-layout: auto; */
+  width: 100%;
         }
 
         .table .header {
-            border-top: 2px dashed #000;
-            border-bottom: 2px dashed #000;
+            border-top: 1px dashed #000;
+            /* font-style: normal; */
+            border-bottom: 1px dashed #000;
             margin-bottom: 5px;
         }
 
         .table {
             text-align: left;
+        }
+        .th{
+            font-weight: normal;
         }
 
         .table .total td:first-of-type {
@@ -54,8 +60,8 @@
         }
 
         .table .total td {
-            border-top: 2px dashed #000;
-            border-bottom: 2px dashed #000;
+            border-top: 1px dashed #000;
+            border-bottom: 1px dashed #000;
         }
 
         .table .net-amount td:first-of-type {
@@ -63,11 +69,11 @@
         }
 
         .table .net-amount td {
-            border-top: 2px dashed #000;
+            border-top: 1px dashed #000;
         }
 
         .table .net-amount {
-            border-bottom: 2px dashed #000;
+            border-bottom: 1px dashed #000;
         }
 
         @media print {
@@ -107,48 +113,47 @@
 
 <body>
     <div class="bill">
-        <div class="brand">
+        <div class="brand" style=" width: 100%;font-size:10px;">
 
-            <strong> Fransisco </strong>
+            {{-- <strong> Fransisco </strong>
             <span style="font-size: 7px;">
-
                 Profesonal Salon
-            </span>
+            </span> --}}
+            <img src="/assets/img/nota.png" style="max-width: 180px;filter: grayscale(100%);
+            height: auto;" alt="" srcset="">
 
 
         </div>
-        <div class="address" style="font-size: 7px;">
-            Jl. Sarean Taman No.2 Madiun
-        </div>
-        <div class="shop-details" style="font-size: 7px;">
-            Telp. 081 335 407 915
-        </div>
+
         <hr>
 
-        <div> </div>
+        {{-- <div> </div> --}}
         <div class="bill-details" style="font-size: 10px;margin-bottom: 5px;">
             <div class="flex justify-between" style="">
                 <div>NOTA NO : {{ $data->manufaktur }}</div>
                 {{-- <div>TABLE NO: 091</div> --}}
             </div>
             <div class="flex justify-between">
-                <div>TANGGAL : {{ $data->tanggal }}</div>
+                <div>TANGGAL : {{ $data->created_at->format('d F Y ') }}</div>
                 {{-- <div>TIME: 14:10</div> --}}
             </div>
 
         </div>
         <table class="table">
             <tr class="header">
-                <th style="width: 20%">
+                <th style="width: 5%; font-weight: normal;">
+                    No
+                </th>
+                <th style="width: 20%; font-weight: normal;">
                     Layanan
                 </th>
-                <th style="width: 35%">
+                <th style="width: 30%; font-weight: normal;">
                     Harga
                 </th>
-                <th style="width: 5%">
+                <th style="width: 5%; font-weight: normal;">
                     Qty
                 </th>
-                <th style="text-align: end; width: 40%">
+                <th style="text-align: end; width: 40%; font-weight: normal;">
                     Subtotal
                 </th>
             </tr>
@@ -164,8 +169,12 @@
                 <th></th>
 
             </tr>
+            @php
+                $no =1;
+            @endphp
             @foreach ($data->layananRelasiDetail as $key)
                 <tr>
+                    <td>{{$no++}}</td>
                     <td>{{ $key->detailRelasiJasa->nama_jasa }}</td>
                     <td>Rp. {{ number_format($key->harga) }}</td>
                     <td style="text-align: center;">{{ $key->jumlah }}</td>
@@ -187,19 +196,24 @@
 
             </tr>
             <tr class="total" style="margin-top: 2px">
-                <td></td>
+                {{-- <td></td> --}}
+                {{-- <td></td> --}}
+                <td colspan="2"></td>
                 <td>Total</td>
                 <td style="text-align: center;">{{ $data->layananRelasiDetail->sum('jumlah') }}</td>
                 <td style="text-align: end;">Rp. {{ number_format($data->total) }}</td>
+
             </tr>
             <tr>
-                <td></td>
+                {{-- <td></td> --}}
+                <td colspan="2"></td>
                 <td>Tunai</td>
                 <td></td>
                 <td style="text-align: end;">Rp. {{ number_format($bayar) }}</td>
             </tr>
             <tr class="net-amount">
-                <td></td>
+                {{-- <td></td> --}}
+                <td colspan="2"></td>
                 <td>Kembali</td>
                 <td></td>
                 <td style="text-align: end;">Rp. {{ number_format($kembalian) }}</td>
