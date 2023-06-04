@@ -30,7 +30,7 @@ class PengeluaranLain extends Component
     public function render()
     {
 
-        $tgl = DB::table('pengeluaranlains')->pluck(DB::raw('YEAR(created_at)'));
+        $tgl = DB::table('tb_pengeluaranlain')->pluck(DB::raw('YEAR(created_at)'));
         $itemsa = ModelsPengeluaranlain::query();
         $itemsa->whereYear('created_at', $this->selectedYear)
             ->orderBy('created_at', 'desc');
@@ -63,6 +63,10 @@ class PengeluaranLain extends Component
             [
                 'keterangan' => 'required',
                 'total' => 'required'
+            ],
+            [
+                'keterangan.required' => 'Kolom Keterangan wajib diisi',
+                'total.required' => 'Kolom total wajib diisi'
             ]
         );
 
@@ -73,6 +77,7 @@ class PengeluaranLain extends Component
             'total' => $this->total
 
         ]);
+        // $this->reset(['keterangan', 'total']);
 
         return redirect()->route('laporan-pengeluaran-lain');
     }

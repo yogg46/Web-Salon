@@ -4,7 +4,8 @@
     <div class="modal-content">
         <div class="modal-card">
             <header class="modal-card-head">
-                <h3> Pengambilan Barang </h3>
+                <h3> Pengambilan Barang  </h3>
+
                 <button wire:ignore wire:click.prevent="resetInput()" class=" h-modal-close ml-auto" aria-label="close">
                     <i data-feather="x"></i>
                 </button>
@@ -24,7 +25,7 @@
                                             style="width:800px;">
                                             <option value="">Pilih Pengambil</option>
                                             @foreach ($pilSup as $ke)
-                                                <option value="{{ $ke->id }}">{{ $ke->name }}</option>
+                                            <option value="{{ $ke->id }}">{{ $ke->name }}</option>
                                             @endforeach
 
                                         </select>
@@ -33,7 +34,7 @@
 
                                 </div>
                                 @error('user_id')
-                                    <span class="error  text-danger">{{ $message }}</span>
+                                <span class="error  text-danger">{{ $message }}</span>
                                 @enderror
 
                                 {{-- <div class="control  @error('nama_suplier') has-validation has-error @enderror">
@@ -50,7 +51,7 @@
 
                                 </div>
                                 @error('nama_suplier')
-                                    <span class="error  text-danger">{{ $message }}</span>
+                                <span class="error  text-danger">{{ $message }}</span>
                                 @enderror --}}
                             </div>
                         </div>
@@ -65,8 +66,8 @@
                                             style="width:800px;" required>
                                             <option value="">Pilih Barang</option>
                                             @foreach ($pilBarang as $ke)
-                                                <option value="{{ $ke->id }}">
-                                                    {{ $ke->nama_barang . ' ( Stock ' . $ke->stock . ' )' }}</option>
+                                            <option value="{{ $ke->id }}">
+                                                {{ $ke->nama_barang . ' ( Stock ' . $ke->stock . ' )' }}</option>
                                             @endforeach
 
                                         </select>
@@ -74,7 +75,7 @@
 
 
                                     @error('barang_id.0')
-                                        <span class="error  text-danger">{{ $message }}</span>
+                                    <span class="error  text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
@@ -89,7 +90,7 @@
 
 
                                     @error('jumlah.0')
-                                        <span class="error  text-danger">{{ $message }}</span>
+                                    <span class="error  text-danger">{{ $message }}</span>
                                     @enderror
 
 
@@ -99,64 +100,62 @@
                         </div>
 
                         {{-- @php
-                            $total = 0;
+                        $total = 0;
                         @endphp --}}
                         @foreach ($inputs as $key => $value)
-                            <div class="column is-6">
-                                <div class="field">
-                                    <label>Barang</label>
-                                    <div
-                                        class="control  @error('barang_id.{{ $value }}') has-validation has-error @enderror">
-                                        <select wire:ignore.self wire:model='barang_id.{{ $value }}'
-                                            class="select w-100" style="width:800px;" required>
-                                            <option>Pilih Barang</option>
-                                            @foreach ($pilBarang as $ke)
-                                                <option value="{{ $ke->id }}">
-                                                    {{ $ke->nama_barang . ' ( Stock ' . $ke->stock . ' )' }}</option>
-                                            @endforeach
+                        <div class="column is-6">
+                            <div class="field">
+                                <label>Barang</label>
+                                <div
+                                    class="control  @error('barang_id.{{ $value }}') has-validation has-error @enderror">
+                                    <select wire:ignore.self wire:model='barang_id.{{ $value }}' class="select w-100"
+                                        style="width:800px;" required>
+                                        <option value="">Pilih Barang</option>
+                                        @foreach ($pilBarang as $ke)
+                                        <option value="{{ $ke->id }}">
+                                            {{ $ke->nama_barang . ' ( Stock ' . $ke->stock . ' )' }}</option>
+                                        @endforeach
 
-                                        </select>
+                                    </select>
 
 
-                                        @error('barang_id.')
-                                            <span class="error  text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
+                                    @error('barang_id.'.$value)
+                                    <span class="error  text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="column is-4">
-                                <div class="field">
-                                    <label>Jumlah</label>
-                                    <div
-                                        class="control  @error('jumlah.{{ $value }}') has-validation has-error @enderror">
-                                        <input type="number" wire:model='jumlah.{{ $value }}'
-                                            class="input is-primary-focus" placeholder="Jumlah *" required>
-
-
-                                        @error('jumlah.' . $value)
-                                            <span class="error  text-danger">{{ $message }}</span>
-                                        @enderror
+                        <div class="column is-4">
+                            <div class="field">
+                                <label>Jumlah</label>
+                                <div class="control  @error('jumlah.{{ $value }}') has-validation has-error @enderror">
+                                    <input type="number" wire:model='jumlah.{{ $value }}' class="input is-primary-focus"
+                                        placeholder="Jumlah *" required>
 
 
-                                    </div>
+                                    @error('jumlah.'.$value)
+                                    <span class="error  text-danger">{{ $message }}</span>
+                                    @enderror
+
 
                                 </div>
-                            </div>
 
-                            <div class="column is-2">
-                                <div class="field">
-                                    <label>hapus </label>
-                                    <div class="control ">
-                                        <a wire:click.prevent="remove({{ $key }})"
-                                            class="button h-button
+                            </div>
+                        </div>
+
+                        <div class="column is-2">
+                            <div class="field">
+                                <label>hapus </label>
+                                <div class="control ">
+                                    <a wire:click.prevent="remove({{ $key }})" class="button h-button
                                             is-outlined is-danger is-raised">
-                                            X</a>
-                                    </div>
+                                        X</a>
                                 </div>
                             </div>
+                        </div>
 
-                            {{-- {{ $total = array_sum($jumlah) }} --}}
+                        {{-- {{ $total = array_sum($jumlah) }} --}}
                         @endforeach
                         <div class="column is-12">
                             <div class="field">

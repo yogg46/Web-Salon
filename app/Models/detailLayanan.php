@@ -10,7 +10,7 @@ class detailLayanan extends Model
     use HasFactory;
     protected $guarded  = ['id'];
     protected $primayKey = 'id';
-    protected $table = 'detail_layanans';
+    protected $table = 'tb_detail_layanan';
 
     public function detailRelasiJasa()
     {

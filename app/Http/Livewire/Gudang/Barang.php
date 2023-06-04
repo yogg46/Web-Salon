@@ -17,11 +17,15 @@ class Barang extends Component
     use LivewireAlert;
 
     public $search = '';
-    public $nama_barang, $harga_jual, $harga_beli, $stock;
-    public $jumlah, $harga, $total, $subtotal, $tanggal;
-    public $barang_id, $pembelian_id, $suplier_id;
+    public  $harga_jual, $harga_beli, $stock;
+    public   $total, $subtotal, $tanggal;
+    public  $pembelian_id, $suplier_id;
     public  $untung;
     public $barang_json;
+    public $barang_id = [];
+    public $jumlah = [];
+    public $harga = [];
+    public $nama_barang = [];
 
     public function render()
     {
@@ -43,10 +47,30 @@ class Barang extends Component
             )
             ->section('isi');
     }
+    public $pp = [];
+    public function updatedNamaBarang($index)
+    {
+        $key = array_search($index, $this->nama_barang);
+        // dd($key);
 
+        // dd($index);
+        $this->pp[$key] = ModelsBarang::where('nama_barang', 'like', '%' . $this->nama_barang[$key] . '%')->pluck('nama_barang')->take(3);
+        return $this->pp[$key];
+    }
+    public function ganti($index, $value)
+    {
+        // dd($index);
+        $this->nama_barang[$index] = $value;
+        $this->pp[$index] = null;
+        # code...
+    }
     public function mount()
     {
-        $this->barang_json = ModelsBarang::pluck('nama_barang')->toJson();
+        $this->barang_json = ModelsBarang::pluck('nama_barang');
+        $this->nama_barang[0] = null;
+        $this->harga[0] = null;
+        $this->jumlah[0] = null;
+        $this->pp[0] = null;
     }
 
     public $inputs = [];
@@ -57,6 +81,10 @@ class Barang extends Component
         $i = $i + 1;
         $this->i = $i;
         array_push($this->inputs, $i);
+        $this->nama_barang[$i] = null;
+        $this->harga[$i] = null;
+        $this->jumlah[$i] = null;
+        $this->pp[$i] = null;
     }
 
     public function remove($i)
@@ -76,71 +104,80 @@ class Barang extends Component
 
     public function store()
     {
-        $validatedDate = $this->validate(
+        $this->validate(
             [
                 'suplier_id' => 'required',
                 'nama_barang.0' => 'required',
                 'harga.0' => 'required',
                 'jumlah.0' => 'required',
-                'untung.0' => 'required',
+                // 'untung.0' => 'required',
                 'nama_barang.*' => 'required',
                 'harga.*' => 'required',
                 'jumlah.*' => 'required',
-                'untung.*' => 'required',
+                // 'untung.*' => 'required',
             ],
             [
-                'nama_barang.0.required' => 'nama barang field is required',
-                'harga.0.required' => 'harga field is required',
-                'jumlah.0.required' => 'jumlah field is required',
-                'untung.0.required' => 'untung field is required',
-                'nama_barang.*.required' => 'nama barang field is required',
-                'harga.*.required' => 'harga field is required',
-                'jumlah.*.required' => 'jumlah field is required',
-                'untung.*.required' => 'untung field is required',
+                'suplier_id.required' => 'Kolom Suplier wajib diisi.',
+                'nama_barang.0.required' => 'Kolom nama barang wajib diisi.',
+                'harga.0.required' => 'Kolom harga wajib diisi.',
+                'jumlah.0.required' => 'Kolom jumlah wajib diisi.',
+                // 'untung.0.required' => 'untung field is required',
+                'nama_barang.*.required' => 'Kolom nama barang wajib diisi.',
+                'harga.*.required' => 'Kolom harga wajib diisi.',
+                'jumlah.*.required' => 'Kolom jumlah wajib diisi.',
+                // 'untung.*.required' => 'untung field is required',
             ]
         );
+
+        $pembelian = Pembelian::create([
+            'petugas_gudang' => Auth::user()->id,
+            'suplier_id' => $this->suplier_id, 'tanggal' => now()->format('d-m-Y'),
+            'total' => array_sum($this->jumlah)
+        ]);
 
         foreach ($this->nama_barang as $key => $value) {
 
             $cek = ModelsBarang::where('nama_barang', $this->nama_barang[$key])->first();
 
+
             if ($cek) {
                 $barang = $cek->update([
                     'stock' => ($cek->stock + $this->jumlah[$key]),
                     'harga_beli' => $this->harga[$key],
-                    'harga_jual' => ($this->harga[$key] + round($this->harga[$key] * $this->untung[$key] / 100)),
+                    // 'harga_jual' => ($this->harga[$key] + round($this->harga[$key] * $this->untung[$key] / 100)),
                 ]);
-                $joko = $cek->id;
-                $pembelian = Pembelian::updateOrCreate([
-                    'petugas_gudang' => Auth::user()->id,
-                    'suplier_id' => $this->suplier_id, 'tanggal' => now()->format('d-m-Y'),
-                    'total' => array_sum($this->jumlah)
-                ]);
-                $detail = $pembelian->pembelianRelasiDetail()->create([
-                    'jumlah' => $this->jumlah[$key], 'harga' => $this->harga[$key],
-                    'subtotal' => ($this->jumlah[$key] * $this->harga[$key]),
-                    'barang_id' => $joko
-                ]);
+                // $joko = $cek->id;
+                // $pembelian = Pembelian::create([
+                //     'petugas_gudang' => Auth::user()->id,
+                //     'suplier_id' => $this->suplier_id, 'tanggal' => now()->format('d-m-Y'),
+                //     'total' => array_sum($this->jumlah)
+                // ]);
+                // // $detail = $pembelian->pembelianRelasiDetail()
+                // detailPembelian::create([
+                //     'pembelian_id' => $pembelian->id,
+                //     'jumlah' => $this->jumlah[$key], 'harga' => $this->harga[$key],
+                //     'subtotal' => ($this->jumlah[$key] * $this->harga[$key]),
+                //     'barang_id' => $joko
+                // ]);
             } else {
                 $barang = ModelsBarang::create([
                     'nama_barang' => $this->nama_barang[$key],
                     'harga_beli' => $this->harga[$key],
-                    'harga_jual' => ($this->harga[$key] + round($this->harga[$key] * $this->untung[$key] / 100)),
+                    // 'harga_jual' => ($this->harga[$key] + round($this->harga[$key] * $this->untung[$key] / 100)),
                     'stock' => $this->jumlah[$key]
                 ]);
-                $pembelian = Pembelian::updateOrCreate([
-                    'petugas_gudang' => Auth::user()->id,
-                    'suplier_id' => $this->suplier_id, 'tanggal' => now()->format('d-m-Y'),
-                    'total' => array_sum($this->jumlah)
-                ]);
-                $detail = $pembelian->pembelianRelasiDetail()->create([
-                    'jumlah' => $this->jumlah[$key],
-                    'harga' => $this->harga[$key],
-                    'subtotal' => ($this->jumlah[$key] * $this->harga[$key]),
-                    'barang_id' => $barang->id
-                ]);
             }
+
+            detailPembelian::create([
+                'pembelian_id' => $pembelian->id,
+                'jumlah' => $this->jumlah[$key],
+                'harga' => $this->harga[$key],
+                'subtotal' => ($this->jumlah[$key] * $this->harga[$key]),
+                'barang_id' => $barang->id
+            ]);
         }
+
+
         $pembelian->update(['total' => $pembelian->pembelianRelasiDetail()->sum('subtotal')]);
         $this->inputs = [];
         // @dd($pembelian->total);

@@ -82,7 +82,7 @@
                             <td>{{ $no++ }}</td>
                             <td>{{ $key->nama_jasa }}</td>
 
-                            <td>Rp. {{ $key->harga }}</td>
+                            <td>Rp. {{ number_format( $key->harga) }}</td>
 
                             <td class=" text-center">
                                 <span class="tag {{ $key->role == 'admin' ? 'is-success' : 'is-info' }} is-rounded">{{

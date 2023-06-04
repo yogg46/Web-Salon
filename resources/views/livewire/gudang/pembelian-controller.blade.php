@@ -1,5 +1,5 @@
 <div>
-    @include('livewire.gudang.view-rinci')
+    {{-- @include('livewire.gudang.view-rinci') --}}
     {{-- @dd($rinci) --}}
     {{-- @json($rinci) --}}
     <div class="page-content-wrapper">
@@ -14,7 +14,7 @@
             </div>
 
             <div class="datatable-toolbar">
-                <div class="field ml-2">
+                {{-- <div class="field ml-2">
                     <div class="control has-icons-left">
                         <div class="select">
                             <select class="datatable-filter datatable-select form-control" wire:model="search">
@@ -29,7 +29,7 @@
                             <i class="lnil lnil-timer"></i>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 {{-- <div class="buttons">
 
                     <button class="button h-button is-primary is-elevated h-modal-trigger" data-modal="add-barang">

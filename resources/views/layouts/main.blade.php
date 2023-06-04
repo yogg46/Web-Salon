@@ -49,7 +49,7 @@
 
                     <a class="navbar-item is-brand" href="/">
                         <img class="light-image" src="/assets/img/logos/logo/logo4.png" alt="">
-                        <img class="dark-image" src="/assets/img/logos/logo/logo5.png" alt="">
+                        <img class="dark-image" src="/assets/img/logos/logo/logo4.png" alt="">
                     </a>
 
                     <div class="brand-end">

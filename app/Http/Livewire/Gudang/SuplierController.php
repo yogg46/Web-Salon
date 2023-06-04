@@ -21,6 +21,10 @@ class SuplierController extends Component
     {
         $this->resetPage();
     }
+    public function resetPage()
+    {
+        $this->gotoPage(1);
+    }
     public function render()
     {
         return view('livewire.gudang.suplier-controller', [
@@ -46,6 +50,9 @@ class SuplierController extends Component
             'nama_suplier' => 'required',
             'alamat' => 'required',
 
+        ],[
+            'nama_suplier.required' => 'Kolom nama suplier wajib diisi',
+            'alamat.required' => 'Kolom alamat suplie wajib diisi',
         ]);
 
         $simpan = new Suplier;
@@ -74,6 +81,9 @@ class SuplierController extends Component
             'nama_suplier' => 'required',
             'alamat' => 'required',
 
+        ],[
+            'nama_suplier.required' => 'Kolom nama suplier wajib diisi',
+            'alamat.required' => 'Kolom alamat suplie wajib diisi',
         ]);
 
         $sup = Suplier::where('id', $this->ids)->first();

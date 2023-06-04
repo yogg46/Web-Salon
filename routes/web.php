@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ExportExcel;
 use App\Http\Controllers\PrintController;
+use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\userController;
 use App\Http\Livewire\Admin\Index;
 use App\Http\Livewire\Profil;
@@ -40,6 +41,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth')->name('home');
+Route::any('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth')->name('filter');
 
 // Route::resource('user', userController::class);
 Route::get('/user', Index::class)->middleware('auth', 'checkRole:admin')->name('user');
@@ -47,18 +49,19 @@ Route::get('/profil', Profil::class)->middleware('auth')->name('profil');
 Route::get('/barang', Barang::class)->middleware('auth', 'checkRole:gudang')->name('barang');
 Route::get('/pengambilan', PengambilanController::class)->middleware('auth', 'checkRole:gudang')->name('pengambilan');
 Route::get('/suplier', SuplierController::class)->middleware('auth', 'checkRole:gudang')->name('suplier');
-Route::get('/pembelian', PembelianController::class)->middleware('auth', 'checkRole:gudang')->name('pembelian');
+Route::get('/pembelian', Laporan2Kasir::class)->middleware('auth', 'checkRole:gudang')->name('pembelian');
 Route::get('/kasir', KasirController::class)->middleware('auth', 'checkRole:kasir')->name('kasir');
 Route::get('/jasa', JasaController::class)->middleware('auth', 'checkRole:kasir')->name('jasa');
 Route::get('/laporan-pemasukan', LaporanKasir::class)->middleware('auth', 'checkRole:kasir,bos')->name('laporan-pemasukan');
 Route::get('/laporan-pengeluaran', Laporan2Kasir::class)->middleware('auth', 'checkRole:kasir,bos')->name('laporan-pengeluaran');
 Route::get('/laporan-pengeluaran-lain', PengeluaranLain::class)->middleware('auth', 'checkRole:kasir,bos')->name('laporan-pengeluaran-lain');
-Route::view('/welcome', 'kasir', ['tittle' => 'Taylor']);
+// Route::view('/welcome', 'kasir', ['tittle' => 'Taylor']);
 // Route::view('/welcome', 'Admin.add', ['tittle' => 'Taylor']);
-Route::get('/bar', [userController::class, 'index']);
+// Route::get('/bar', [userController::class, 'index']);
 
 
-Route::get('/print/{id}-{bayar}-{kembalian}', [PrintController::class, 'index']);
+Route::get('/print/{id}-{bayar}-{kembalian}-{print}', [RecipeController::class, 'printRecipe']);
+
 Route::get('/laporan', Laporanfull::class);
 
 Route::get('/export-laporan-all', [ExportExcel::class, 'exportall_laporan'])->name('export-excel-laporan-all');

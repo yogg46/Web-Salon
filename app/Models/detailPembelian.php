@@ -9,11 +9,17 @@ use Illuminate\Database\Eloquent\Model;
 class detailPembelian extends Model
 {
     use HasFactory;
-    protected $guarded  = ['id'];
+    // protected $guarded  = ['id'];
     protected $primayKey = 'id';
-    protected $table = 'detail_pembelians';
+    protected $table = 'tb_detail_pembelian';
 
-    
+    protected $fillable = [
+        'jumlah',
+        'harga',
+        'subtotal',
+        'pembelian_id',
+        'barang_id'
+    ];
 
     public function detailRelasiBarang()
     {

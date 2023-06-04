@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -20,6 +21,16 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            $this->username() => 'required|string',
+            'password' => 'required|string',
+        ], [
+            $this->username() . '.required' => 'Kolom ' . $this->username() . ' wajib diisi.',
+            'password.required' => 'Kolom password wajib diisi.',
+        ]);
+    }
 
     /**
      * Where to redirect users after login.

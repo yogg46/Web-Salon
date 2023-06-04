@@ -41,11 +41,11 @@ class LaporanKasir extends Component
     public function render()
     {
 
-        $tgl = DB::table('layanans')->pluck(DB::raw('YEAR(created_at)'));
+        $tgl = DB::table('tb_layanan')->pluck(DB::raw('YEAR(created_at)'));
         $itemsa = Layanan::query();
         $itemsa->whereYear('created_at', $this->selectedYear)
             ->orderBy('created_at', 'desc');
-            
+
             if ($this->selectedMonth) {
                 $itemsa->whereMonth('created_at', $this->selectedMonth);
             }

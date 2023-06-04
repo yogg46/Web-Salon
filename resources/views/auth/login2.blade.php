@@ -72,7 +72,7 @@
 
                                     <div class="control has-validation">
                                         <input id="email" type="email" class="input" placeholder="" name="email"
-                                            value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                            value="{{ old('email') }}" autocomplete="email" autofocus>
                                         <small class="error-text">This is a required field</small>
                                         <div class="auth-label">Email</div>
                                         <div class="auth-icon">
@@ -89,13 +89,13 @@
                                             </div>
                                         </div>
                                         @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                        <span class="invalid-feedback " role="alert">
+                                            <small class="text-danger">{{ $message }}</small>
                                         </span>
                                         @enderror
                                     </div>
                                     <div class="control has-validation">
-                                        <input id="password" type="password" class="input" name="password" required
+                                        <input id="password" type="password" class="input" name="password"
                                             autocomplete="current-password">
                                         <div class="auth-label">Kata Sandi</div>
                                         <div class="auth-icon">
@@ -103,7 +103,7 @@
                                         </div>
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <small class="text-danger">{{ $message }}</small>
                                         </span>
                                         @enderror
                                     </div>

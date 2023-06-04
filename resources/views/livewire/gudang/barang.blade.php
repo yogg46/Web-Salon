@@ -68,14 +68,14 @@
 
                         <tbody>
                             @foreach ($barang as $v)
-                                <tr>
-                                    <td>{{ $v->no_barang }}</td>
-                                    <td>{{ $v->nama_barang }}</td>
-                                    <td>Rp. {{ $v->harga_beli }}</td>
-                                    {{-- <td>Rp. {{ $v->harga_jual }}</td> --}}
-                                    <td>{{ $v->stock }}</td>
-                                    {{-- <td>01-10-2022</td> --}}
-                                </tr>
+                            <tr>
+                                <td>{{ $v->no_barang }}</td>
+                                <td>{{ $v->nama_barang }}</td>
+                                <td>Rp. {{ number_format($v->harga_beli) }}</td>
+                                {{-- <td>Rp. {{ $v->harga_jual }}</td> --}}
+                                <td>{{ $v->stock }}</td>
+                                {{-- <td>01-10-2022</td> --}}
+                            </tr>
                             @endforeach
 
                         </tbody>
@@ -98,25 +98,31 @@
         {{-- @dd($barang_json) --}}
     </div>
     @push('scripts')
-        <script>
-            //JS CODE
-            var options = {
-                data: {!! $barang_json !!}
-            };
+    <script>
+        //JS CODE
+            // var options = {
+            //     data: @json($barang_json),
+            //     list: {
+            //         maxNumberOfElements: 5,
+            //         showAnimation: {
+            //             type: "fade", //normal|slide|fade
+            //             time: 400,
+            //             callback: function() {},
+            //         },
+            //         match: {
+            //             enabled: true,
+            //         },
+            //         onChooseEvent: function() {
+            //             Livewire.on('ganti');
+            //         },
+            //     }
+            // };
 
-            // $("#basics").easyAutocomplete(options);
+            // // $("#basics").easyAutocomplete(options);
 
-            $("#autocomplete-barang").easyAutocomplete(options);
+            // $("#autocomplete-barang").easyAutocomplete(options);
 
-            //MARKUP
-            //     <div class="field is-autocomplete">
-            //     <div class="control has-icon">
-            //         <input id="autocomplete-demo-simple" type="text" class="input" placeholder="Search people...">
-            //         <div class="form-icon">
-            //             <i data-feather="search"></i>
-            //         </div>
-            //     </div>
-            // </div>
-        </script>
+
+    </script>
     @endpush
 </div>

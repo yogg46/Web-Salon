@@ -37,15 +37,25 @@ class PengambilanController extends Component
 
     public $inputs = [];
     public $i = 1;
-    public $jumlah;
+    public $jumlah = [];
     public $user_id;
-    public $barang_id;
+    public $barang_id = [];
+    public function mount()
+    {
+        $this->barang_id[0] = null;
+        $this->jumlah[0] = null;
+        # code...
+    }
 
     public function add($i)
     {
         $i = $i + 1;
         $this->i = $i;
         array_push($this->inputs, $i);
+        // array_push($this->barang_id, null);
+        // array_push($this->jumlah, null);
+        $this->barang_id[$i] = null;
+        $this->jumlah[$i] = null;
     }
 
     public function remove($i)

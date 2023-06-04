@@ -17,6 +17,16 @@ class JasaController extends Component
     public $select2 = '';
     public $cek;
     public $cek1;
+
+    public function updatingselect2()
+    {
+        $this->resetPage();
+    }
+
+    public function resetPage()
+    {
+        $this->gotoPage(1);
+    }
     public function render()
     {
         return view('livewire.kasir.jasa-controller', [
@@ -31,7 +41,7 @@ class JasaController extends Component
         )
             ->section('isi');
     }
-    protected $listeners = ['some-event' => '$refresh','deleteJasa','deleteKategori'];
+    protected $listeners = ['some-event' => '$refresh', 'deleteJasa', 'deleteKategori'];
     public function cekL()
     {
         $this->alert('success', 'Data Berhasil Disimpan');
@@ -46,6 +56,8 @@ class JasaController extends Component
     {
         $this->validate([
             'kategori' => 'required',
+        ], [
+            'kategori.required' => 'Kolom kategori wajib diisi'
         ]);
 
         $simpan = new Kategori;
@@ -64,6 +76,10 @@ class JasaController extends Component
             'nama_jasa' => 'required',
             'harga' => 'required',
 
+        ], [
+            'kategori_id.required' => 'Kolom kategori wajib diisi',
+            'nama_jasa.required' => 'Kolom nama jasa wajib diisi',
+            'harga.required' => 'Kolom kategori wajib diisi',
         ]);
 
         Jasa::create([
@@ -72,7 +88,7 @@ class JasaController extends Component
             'harga' => $this->harga,
 
         ]);
-         return redirect()->route('jasa');
+        return redirect()->route('jasa');
     }
 
     public function editJasa($id)
@@ -91,6 +107,10 @@ class JasaController extends Component
             'nama_jasa' => 'required',
             'harga' => 'required',
 
+        ], [
+            'kategori_id.required' => 'Kolom kategori wajib diisi',
+            'nama_jasa.required' => 'Kolom nama jasa wajib diisi',
+            'harga.required' => 'Kolom kategori wajib diisi',
         ]);
 
         $jas = Jasa::where('id', $this->idj)->first();
@@ -136,10 +156,9 @@ class JasaController extends Component
 
         $kat = Kategori::where('id', $this->idk)->first();
         $kat->update([
-            'kategori'=> $this->kategori,
+            'kategori' => $this->kategori,
         ]);
         return redirect()->route('jasa');
-
     }
     public function konKategori($id)
     {
