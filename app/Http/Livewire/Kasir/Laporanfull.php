@@ -136,7 +136,7 @@ class Laporanfull extends Component
         ])->extends(
             'layouts.main',
             [
-                'tittle' => 'Laporan Pemasukan',
+                'tittle' => 'Laporan',
                 'slug1' => ''
             ]
         )

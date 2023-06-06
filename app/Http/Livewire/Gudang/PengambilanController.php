@@ -106,14 +106,14 @@ class PengambilanController extends Component
                     'barang_id' => $this->barang_id[$key],
                     'jumlah' => $this->jumlah[$key],
                 ]);
-                $cek->update([
-                    'stock' => (int)$cek->stock - (int)$this->jumlah[$key],
-                ]);
+                // $cek->update([
+                //     'stock' => (int)$cek->stock - (int)$this->jumlah[$key],
+                // ]);
 
                 $this->inputs = [];
                 $this->alert('success', ' Berhasil ');
                 // $this->resetInput();
-                // return redirect()->route('pengambilan');
+                return redirect()->route('pengambilan');
             }
         }
 

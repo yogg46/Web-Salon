@@ -24434,7 +24434,7 @@ body.is-dark .main-sidebar.is-colored .profile-dropdown .dropdown-menu .dropdown
     align-items: center;
     font-size: .9rem;
     font-weight: 500;
-    color: #a2a5b9;
+    color: #ffff;
     padding: .85rem;
     margin: 0 2rem .25rem 2rem;
     width: 100%;
@@ -24686,18 +24686,18 @@ body.is-dark .sidebar-block .sidebar-block-inner li.has-children:hover .collapse
 }
 
 body.is-dark .sidebar-block .sidebar-block-inner a:not(.single-link):hover {
-    color: #fcfcfc
+    color: #ab76ff
 }
 
 body.is-dark .sidebar-block .sidebar-block-inner .single-link:hover,
 body.is-dark .sidebar-block .sidebar-block-inner .single-link.active {
     background: #37373b;
-    color: #fcfcfc
+    color: #ab76ff
 }
 
 body.is-dark .sidebar-block .sidebar-block-inner .single-link:hover .icon i,
 body.is-dark .sidebar-block .sidebar-block-inner .single-link.active .icon i {
-    color: #797bf2
+    color: #ab76ff
 }
 
 body.is-dark .sidebar-block .sidebar-block-inner .single-link:hover .icon svg,
@@ -24740,6 +24740,7 @@ body.is-dark .sidebar-block .sidebar-block-footer .profile-dropdown .dropdown-me
 
 body:not(.is-dark) .sidebar-block.is-colored {
     background: #1d2532 !important;
+    /* background: linear-gradient(to bottom, #6b1ccd, #2d6ef4) !important; */
     border-color: #3d4e68 !important
 }
 
@@ -24753,6 +24754,7 @@ body:not(.is-dark) .sidebar-block.is-colored .sidebar-block-header h3 {
 
 body:not(.is-dark) .sidebar-block.is-colored .sidebar-block-inner {
     background: #1d2532 !important
+    /* background: linear-gradient(to bottom, #6b1ccd, #2d6ef4) !important; */
 }
 
 body:not(.is-dark) .sidebar-block.is-colored .sidebar-block-inner li.has-children.active .collapse-wrap>a {
@@ -24779,7 +24781,7 @@ body:not(.is-dark) .sidebar-block.is-colored .sidebar-block-inner a:not(.single-
 body:not(.is-dark) .sidebar-block.is-colored .sidebar-block-inner .single-link:hover,
 body:not(.is-dark) .sidebar-block.is-colored .sidebar-block-inner .single-link.active {
     background: #273142 !important;
-    color: #fcfcfc !important
+    color: #ab76ff !important
 }
 
 body:not(.is-dark) .sidebar-block.is-colored .sidebar-block-inner .single-link:hover .icon i,
