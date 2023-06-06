@@ -79,7 +79,7 @@ class penglain implements FromView, WithHeadings, WithStyles, ShouldAutoSize
                 ],
             ],
             'alignment' => [
-                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'horizontal' => Alignment::HORIZONTAL_LEFT,
                 'vertical' => Alignment::VERTICAL_CENTER,
             ],
         ];

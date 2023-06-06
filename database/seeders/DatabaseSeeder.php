@@ -20,18 +20,18 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        // $this->call(Userseeder::class);
-        // \App\Models\User::factory(10)->create();
-        \App\Models\Suplier::factory(5)->create();
-        \App\Models\Barang::factory(10)->create();
+        $this->call(Userseeder::class);
+        \App\Models\User::factory(10)->create();
+        \App\Models\Suplier::factory(15)->create();
+        \App\Models\Barang::factory(30)->create();
         \App\Models\Pembelian::factory(3)->create();
         \App\Models\detailPembelian::factory(20)->create();
         \App\Models\Pengambilan::factory(11)->create();
 
-        // Kategori::factory(5)->create();
+        Kategori::factory(5)->create();
         // Jasa::factory(10)->create();
-        Layanan::factory(3)->create();
-        detailLayanan::factory(10)->create();
+        Layanan::factory(4)->create();
+        detailLayanan::factory(30)->create();
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',

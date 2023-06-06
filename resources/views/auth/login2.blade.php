@@ -110,8 +110,10 @@
 
                                     <div class="control is-flex">
                                         <label class="remember-toggle">
-                                            <input type="checkbox" name="remember" id="remember" {{ old('remember')
+                                            <input type="checkbox"   {{ old('remember')
                                                 ? 'checked' : '' }}>
+                                            {{-- <input type="checkbox" name="remember" id="remember" {{ old('remember')
+                                                ? 'checked' : '' }}> --}}
                                             <span class="toggler">
                                                 <span class="active">
                                                     <i data-feather="check"></i>

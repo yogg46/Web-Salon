@@ -83,7 +83,7 @@ class pengeluaranall implements FromView, WithHeadings, WithStyles, ShouldAutoSi
                 ],
             ],
             'alignment' => [
-                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'horizontal' => Alignment::HORIZONTAL_LEFT,
                 'vertical' => Alignment::VERTICAL_CENTER,
             ],
         ];

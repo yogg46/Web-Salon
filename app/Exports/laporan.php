@@ -87,11 +87,11 @@ class laporan implements FromView, WithHeadings, WithStyles, ShouldAutoSize,With
                 ],
             ],
             'alignment' => [
-                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'horizontal' => Alignment::HORIZONTAL_LEFT,
                 'vertical' => Alignment::VERTICAL_CENTER,
             ],
         ];
 
-        $sheet->getStyle("A1:F{$lastRow}")->applyFromArray($styleArray);
+        $sheet->getStyle("A2:F{$lastRow}")->applyFromArray($styleArray);
     }
 }

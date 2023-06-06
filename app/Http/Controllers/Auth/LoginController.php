@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-
+use Illuminate\Validation\ValidationException;
 class LoginController extends Controller
 {
     /*
@@ -31,7 +31,12 @@ class LoginController extends Controller
             'password.required' => 'Kolom password wajib diisi.',
         ]);
     }
-
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        throw ValidationException::withMessages([
+            $this->username() => ['Kkredensial ini tidak cocok dengan catatan kami. Silakan periksa kembali username dan password Anda.'],
+        ]);
+    }
     /**
      * Where to redirect users after login.
      *

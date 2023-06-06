@@ -4,7 +4,7 @@
     <div class="modal-content">
         <div class="modal-card">
             <header class="modal-card-head">
-                <h3> Pembelian Barang @json($nama_barang)</h3>
+                <h3> Pembelian Barang </h3>
                 <button wire:ignore wire:click.prevent="resetInput()" class=" h-modal-close ml-auto" aria-label="close">
                     <i data-feather="x"></i>
                 </button>

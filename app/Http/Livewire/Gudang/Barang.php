@@ -146,19 +146,15 @@ class Barang extends Component
                     'harga_beli' => $this->harga[$key],
                     // 'harga_jual' => ($this->harga[$key] + round($this->harga[$key] * $this->untung[$key] / 100)),
                 ]);
-                // $joko = $cek->id;
-                // $pembelian = Pembelian::create([
-                //     'petugas_gudang' => Auth::user()->id,
-                //     'suplier_id' => $this->suplier_id, 'tanggal' => now()->format('d-m-Y'),
-                //     'total' => array_sum($this->jumlah)
-                // ]);
-                // // $detail = $pembelian->pembelianRelasiDetail()
-                // detailPembelian::create([
-                //     'pembelian_id' => $pembelian->id,
-                //     'jumlah' => $this->jumlah[$key], 'harga' => $this->harga[$key],
-                //     'subtotal' => ($this->jumlah[$key] * $this->harga[$key]),
-                //     'barang_id' => $joko
-                // ]);
+
+
+                detailPembelian::create([
+                    'pembelian_id' => $pembelian->id,
+                    'jumlah' => $this->jumlah[$key],
+                    'harga' => $this->harga[$key],
+                    'subtotal' => ($this->jumlah[$key] * $this->harga[$key]),
+                    'barang_id' => $cek->id
+                ]);
             } else {
                 $barang = ModelsBarang::create([
                     'nama_barang' => $this->nama_barang[$key],
@@ -166,15 +162,16 @@ class Barang extends Component
                     // 'harga_jual' => ($this->harga[$key] + round($this->harga[$key] * $this->untung[$key] / 100)),
                     'stock' => $this->jumlah[$key]
                 ]);
+                // dd($barang->id);
+                detailPembelian::create([
+                    'pembelian_id' => $pembelian->id,
+                    'jumlah' => $this->jumlah[$key],
+                    'harga' => $this->harga[$key],
+                    'subtotal' => ($this->jumlah[$key] * $this->harga[$key]),
+                    'barang_id' => $barang->id
+                ]);
             }
 
-            detailPembelian::create([
-                'pembelian_id' => $pembelian->id,
-                'jumlah' => $this->jumlah[$key],
-                'harga' => $this->harga[$key],
-                'subtotal' => ($this->jumlah[$key] * $this->harga[$key]),
-                'barang_id' => $barang->id
-            ]);
         }
 
 

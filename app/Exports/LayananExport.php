@@ -61,7 +61,7 @@ class LayananExport implements FromView, WithHeadings, WithStyles, ShouldAutoSiz
             'SUBTOTAL',
         ];
     }
-    
+
 
     public function styles(Worksheet $sheet)
     {
@@ -93,7 +93,7 @@ class LayananExport implements FromView, WithHeadings, WithStyles, ShouldAutoSiz
                 ],
             ],
             'alignment' => [
-                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'horizontal' => Alignment::HORIZONTAL_LEFT,
                 'vertical' => Alignment::VERTICAL_CENTER,
             ],
         ];

@@ -23,8 +23,8 @@ class RecipeController extends Controller
     {
         $data = Layanan::where('id', $id)->withSum('layananRelasiDetail', 'jumlah')->first();
         // dd(number_format($data->total));
-        $profile = CapabilityProfile::load("POS-5890");
         $connector = new WindowsPrintConnector($print);
+        $profile = CapabilityProfile::load("POS-5890");
         $printer = new Printer($connector, $profile);
 
         try {
@@ -34,7 +34,10 @@ class RecipeController extends Controller
             $subtotal = new item('Total', 'Rp.' . number_format($data->total));
             $Bayar = new item('Bayar', 'Rp.' . number_format($bayar));
             $Kembali = new item('Kembali', 'Rp.' . number_format($kembalian));
-
+            $companyName = "Fransisco";
+            $companyName2 = "Professional Salon";
+            $address = "Jl. Sarean Taman No.2 Madiun";
+            $phone = "Telp. 081 335 407 915";
             $invoiceNumber = $data->manufaktur;
 
             setlocale(LC_TIME, 'id_ID');
@@ -44,15 +47,28 @@ class RecipeController extends Controller
 
 
             $pp = public_path('nota1.png');
-            $logo = EscposImage::load($pp, false);
-            $printer->setJustification(Printer::JUSTIFY_CENTER);
-            if ($profile->getSupportsGraphics()) {
-                $printer->graphics($logo);
-            }
-            if ($profile->getSupportsBitImageRaster() && !$profile->getSupportsGraphics()) {
-                $printer->bitImage($logo);
-            }
+            // dd($pp);
+            // $logo = EscposImage::load($pp, false);
+            // $printer->setJustification(Printer::JUSTIFY_CENTER);
+            // if ($profile->getSupportsGraphics()) {
+            //     $printer->graphics($logo);
+            // }
+            // if ($profile->getSupportsBitImageRaster() && !$profile->getSupportsGraphics()) {
+            //     $printer->bitImage($logo);
+            // }
+            $printer->initialize();
             $printer->setEmphasis(true);
+            $printer->setJustification(Printer::JUSTIFY_CENTER);
+            $printer->setTextSize(2,2);
+            // $printer->selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
+            // $printer->selectPrintMode(Printer::MODE_DOUBLE_HEIGHT);
+            $printer->text("$companyName\n");
+            $printer->setTextSize(1,1);
+            $printer->selectPrintMode(); // Reset the print mode
+            $printer->text("$companyName2\n");
+            $printer->text("$address\n");
+            $printer->text("$phone\n");
+            // $printer->feed();
             $printer->text("--------------------------------\n");
             $printer->text("No Faktur: " . $invoiceNumber . "\n");
             $printer->text("Tanggal: " . $date . "\n");
@@ -104,7 +120,7 @@ class RecipeController extends Controller
         } catch (\Exception $e) {
             // Handle any errors
             echo $e->getMessage();
-            return redirect()->back();
+            // return redirect()->back();
             // return redirect()->route('kasir');
         }
     }

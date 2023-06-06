@@ -87,7 +87,7 @@ class LayananExportAll implements FromView, WithHeadings, WithStyles, ShouldAuto
                 ],
             ],
             'alignment' => [
-                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'horizontal' => Alignment::HORIZONTAL_LEFT,
                 'vertical' => Alignment::VERTICAL_CENTER,
             ],
         ];
