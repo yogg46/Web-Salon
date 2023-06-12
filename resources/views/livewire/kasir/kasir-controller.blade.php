@@ -26,7 +26,7 @@
                                 <div class="restaurants">
                                     <div class="restaurants-toolbar">
                                         <div class="left">
-                                            <h3>SALON KECANTIKAN </h3>
+                                            <h3> </h3>
                                         </div>
                                         <br>
 
@@ -80,7 +80,7 @@
                                                             <div class="meta-container">
                                                                 <div class="meta-icon">
                                                                     <div class="animated-checkbox" wire:ignore>
-                                                                        <input wire:change='rep({{ $j->id }})'
+                                                                        <input wire:loading.attr='disabled' wire:change='rep({{ $j->id }})'
                                                                             wire:model="cek" type="checkbox"
                                                                             value="{{ $j->id }}"
                                                                             id="option{{ $j->id }}">

@@ -55,11 +55,11 @@
                                     </div>
                                     <div class="right">
                                         <div class="field">
-                                            <div class="control">
+                                            <div class="control select">
                                                 <form id="filterForm" action="{{ route('filter') }}" method="POST">
                                                     @method('PUT')
                                                     @csrf
-                                                    <select name="waktu" onchange="submitForm()">
+                                                    <select name="waktu" class=" form-control" onchange="submitForm()">
                                                         <option value="">Pilih Filter</option>
                                                         <option value="1">7 hari terakhir</option>
                                                         <option value="2">1 bulan terakhir</option>
