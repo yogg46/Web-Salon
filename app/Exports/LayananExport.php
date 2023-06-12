@@ -80,10 +80,29 @@ class LayananExport implements FromView, WithHeadings, WithStyles, ShouldAutoSiz
             ],
             'font' => [
                 'bold' => true,
+                'size' => 16,
             ],
         ];
 
         $sheet->getStyle('A1:G1')->applyFromArray($styleArray);
+
+        $styleArray = [
+            'borders' => [
+                'outline' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'],
+                ],
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+            ],
+            'font' => [
+                'bold' => true,
+            ],
+        ];
+
+        $sheet->getStyle('A2:G2')->applyFromArray($styleArray);
 
         $styleArray = [
             'borders' => [
@@ -98,6 +117,6 @@ class LayananExport implements FromView, WithHeadings, WithStyles, ShouldAutoSiz
             ],
         ];
 
-        $sheet->getStyle("A1:G{$lastRow}")->applyFromArray($styleArray);
+        $sheet->getStyle("A3:G{$lastRow}")->applyFromArray($styleArray);
     }
 }

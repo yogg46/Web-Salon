@@ -11,9 +11,8 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class pengeluaranall implements FromView, WithHeadings, WithStyles, ShouldAutoSize
+class ambil implements FromView, WithHeadings, WithStyles, ShouldAutoSize
 {
-
     protected $layanans;
 
     public function __construct($layanans)
@@ -26,13 +25,12 @@ class pengeluaranall implements FromView, WithHeadings, WithStyles, ShouldAutoSi
         $layanans = $this->layanans;
         $total = 0;
 
-        foreach ($layanans as $layanan) {
-            foreach ($layanan->pembelianRelasiDetail as $detail) {
-                $total += $detail->subtotal;
-            }
-        }
+        // foreach ($layanans as $layanan) {
 
-        return view('export.export-pengeluaran', [
+        //     $total += $layanan->total;
+        // }
+
+        return view('export.export-ambil', [
             'layanans' => $layanans,
             'total' => $total,
         ]);
@@ -41,14 +39,12 @@ class pengeluaranall implements FromView, WithHeadings, WithStyles, ShouldAutoSi
     public function headings(): array
     {
         return [
-            'No',
-            'MANUFAKTUR',
+            'ID',
             'TANGGAL',
-            'PETUGAS GUDANG',
-            'SUPLIER',
             'BARANG',
             'JUMLAH',
-            'SUBTOTAL',
+            'PENGAMBIL',
+
         ];
     }
 
@@ -74,8 +70,8 @@ class pengeluaranall implements FromView, WithHeadings, WithStyles, ShouldAutoSi
             ],
         ];
 
-        $sheet->getStyle('A1:H1')->applyFromArray($styleArray);
-
+        $sheet->getStyle('A1:E1')->applyFromArray($styleArray);
+        
         $styleArray = [
             'borders' => [
                 'outline' => [
@@ -89,10 +85,10 @@ class pengeluaranall implements FromView, WithHeadings, WithStyles, ShouldAutoSi
             ],
             'font' => [
                 'bold' => true,
+
             ],
         ];
-
-        $sheet->getStyle('A2:H2')->applyFromArray($styleArray);
+        $sheet->getStyle('A2:E2')->applyFromArray($styleArray);
 
         $styleArray = [
             'borders' => [
@@ -107,6 +103,6 @@ class pengeluaranall implements FromView, WithHeadings, WithStyles, ShouldAutoSi
             ],
         ];
 
-        $sheet->getStyle("A3:H{$lastRow}")->applyFromArray($styleArray);
+        $sheet->getStyle("A3:E{$lastRow}")->applyFromArray($styleArray);
     }
 }

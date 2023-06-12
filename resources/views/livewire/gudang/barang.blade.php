@@ -59,7 +59,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nama barang</th>
-                                <th>Harga beli</th>
+                                <th>Harga satuan</th>
                                 {{-- <th>Harga Jual</th> --}}
                                 <th>Stok</th>
                                 {{-- <th>Tanggal</th> --}}

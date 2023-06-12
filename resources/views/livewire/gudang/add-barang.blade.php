@@ -82,7 +82,7 @@
                         </div>
                         <div class="column is-4">
                             <div class="field">
-                                <label>Harga</label>
+                                <label>Harga satuan</label>
                                 <div class="control  @error('harga.0') has-validation has-error @enderror">
                                     <input type="number" wire:model.lazy='harga.0' class="input is-primary-focus"
                                         placeholder="Harga *">
@@ -158,7 +158,7 @@
                         </div>
                         <div class="column is-4">
                             <div class="field">
-                                <label>Harga</label>
+                                <label>Harga satuan</label>
                                 <div class="control  @error('harga.'.$value) has-validation has-error @enderror">
                                     <input type="number" wire:model='harga.{{ $value }}' class="input is-primary-focus"
                                         placeholder="Harga *">

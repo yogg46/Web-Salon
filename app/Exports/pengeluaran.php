@@ -77,10 +77,29 @@ class pengeluaran implements FromView, WithHeadings, WithStyles, ShouldAutoSize,
             ],
             'font' => [
                 'bold' => true,
+                'size' => 16,
             ],
         ];
 
         $sheet->getStyle('A1:H1')->applyFromArray($styleArray);
+
+        $styleArray = [
+            'borders' => [
+                'outline' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'],
+                ],
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+            ],
+            'font' => [
+                'bold' => true,
+            ],
+        ];
+
+        $sheet->getStyle('A2:H2')->applyFromArray($styleArray);
 
         $styleArray = [
             'borders' => [
@@ -95,6 +114,6 @@ class pengeluaran implements FromView, WithHeadings, WithStyles, ShouldAutoSize,
             ],
         ];
 
-        $sheet->getStyle("A1:H{$lastRow}")->applyFromArray($styleArray);
+        $sheet->getStyle("A3:H{$lastRow}")->applyFromArray($styleArray);
     }
 }
