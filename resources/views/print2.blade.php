@@ -37,7 +37,7 @@
             border-collapse: collapse;
             /* width: 100%; */
             /* table-layout: auto; */
-  width: 100%;
+            width: 100%;
         }
 
         .table .header {
@@ -50,7 +50,8 @@
         .table {
             text-align: left;
         }
-        .th{
+
+        .th {
             font-weight: normal;
         }
 
@@ -78,10 +79,23 @@
 
         @media print {
 
-            .hidden-print,
-            .hidden-print * {
-                display: none !important;
+            @page {
+                size: 21mm 58mm;
+                /* Mengatur ukuran kertas */
             }
+
+
+
+            .bill {
+                width: 90%;
+                margin: 0;
+                box-shadow: none;
+            }
+            .brand{
+                width: 60%;
+            }
+
+
         }
     </style>
     {{-- <script>
@@ -119,8 +133,9 @@
             <span style="font-size: 7px;">
                 Profesonal Salon
             </span> --}}
-            <img src="/assets/img/nota.png" style="max-width: 180px;filter: grayscale(100%);
-            height: auto;" alt="" srcset="">
+            <img src="/assets/img/nota.png" style="max-width: 120px;filter: grayscale(100%);
+            height: auto;"
+                alt="" srcset="">
 
 
         </div>
@@ -133,27 +148,30 @@
                 <div>NOTA NO : {{ $data->manufaktur }}</div>
                 {{-- <div>TABLE NO: 091</div> --}}
             </div>
+            @php
+                setlocale(LC_TIME, 'id_ID');
+                \Carbon\Carbon::setLocale('id');
+            @endphp
+
             <div class="flex justify-between">
-                <div>TANGGAL : {{ $data->created_at->format('d F Y ') }}</div>
+                <div>TANGGAL : {{ $data->created_at->translatedFormat('d F Y') }}</div>
                 {{-- <div>TIME: 14:10</div> --}}
             </div>
 
         </div>
         <table class="table">
             <tr class="header">
-                <th style="width: 5%; font-weight: normal;">
+                {{-- <th style="width: 5%; font-weight: normal;">
                     No
-                </th>
-                <th style="width: 20%; font-weight: normal;">
+                </th> --}}
+                <th style="width: 40%; font-weight: normal;">
                     Layanan
                 </th>
-                <th style="width: 30%; font-weight: normal;">
-                    Harga
-                </th>
+
                 <th style="width: 5%; font-weight: normal;">
                     Qty
                 </th>
-                <th style="text-align: end; width: 40%; font-weight: normal;">
+                <th style="text-align: end; width: 60%; font-weight: normal;text-align: end;">
                     Subtotal
                 </th>
             </tr>
@@ -170,13 +188,15 @@
 
             </tr>
             @php
-                $no =1;
+                $no = 1;
             @endphp
             @foreach ($data->layananRelasiDetail as $key)
                 <tr>
-                    <td>{{$no++}}</td>
-                    <td>{{ $key->detailRelasiJasa->nama_jasa }}</td>
-                    <td>Rp. {{ number_format($key->harga) }}</td>
+                    <td colspan="3">{{ $key->detailRelasiJasa->nama_jasa }}</td>
+                </tr>
+                <tr>
+                    {{-- <td>{{ $no++ }}</td> --}}
+                    <td colspan="1">Rp. {{ number_format($key->harga) }}</td>
                     <td style="text-align: center;">{{ $key->jumlah }}</td>
                     <td style="text-align: end;">
                         Rp. {{ number_format($key->subtotal) }}
@@ -198,7 +218,6 @@
             <tr class="total" style="margin-top: 2px">
                 {{-- <td></td> --}}
                 {{-- <td></td> --}}
-                <td colspan="2"></td>
                 <td>Total</td>
                 <td style="text-align: center;">{{ $data->layananRelasiDetail->sum('jumlah') }}</td>
                 <td style="text-align: end;">Rp. {{ number_format($data->total) }}</td>
@@ -206,14 +225,14 @@
             </tr>
             <tr>
                 {{-- <td></td> --}}
-                <td colspan="2"></td>
+
                 <td>Tunai</td>
                 <td></td>
                 <td style="text-align: end;">Rp. {{ number_format($bayar) }}</td>
             </tr>
             <tr class="net-amount">
                 {{-- <td></td> --}}
-                <td colspan="2"></td>
+
                 <td>Kembali</td>
                 <td></td>
                 <td style="text-align: end;">Rp. {{ number_format($kembalian) }}</td>

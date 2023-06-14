@@ -17,8 +17,7 @@ class userController extends Controller
      */
     public function index()
     {
-        $bar = ModelsBarang::all()->toJson();
-        return $bar;
+        return view('coba');
     }
 
     /**

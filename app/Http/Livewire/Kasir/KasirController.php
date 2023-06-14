@@ -14,7 +14,9 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Mike42\Escpos\EscposImage;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
-use Mike42\Escpos\Printer;
+// use Mike42\Escpos\Printer;
+use Illuminate\Support\Facades\Printer;
+
 use Mike42\Escpos\CapabilityProfile;
 use Carbon\Carbon;
 
@@ -49,6 +51,14 @@ class KasirController extends Component
                 }
             }
         }
+        // $printers = Printer::all();
+
+        // foreach ($printers as $printer) {
+        //     $printerName = $printer->name;
+        //     $isDefault = $printer->default;
+
+
+        // }
 
         return view('livewire.kasir.kasir-controller', [
             'kate' => Kategori::all(),

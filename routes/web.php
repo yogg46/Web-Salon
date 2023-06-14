@@ -57,10 +57,11 @@ Route::get('/laporan-pengeluaran', Laporan2Kasir::class)->middleware('auth', 'ch
 Route::get('/laporan-pengeluaran-lain', PengeluaranLain::class)->middleware('auth', 'checkRole:kasir,bos')->name('laporan-pengeluaran-lain');
 // Route::view('/welcome', 'kasir', ['tittle' => 'Taylor']);
 // Route::view('/welcome', 'Admin.add', ['tittle' => 'Taylor']);
-// Route::get('/bar', [userController::class, 'index']);
+Route::get('/bar', [userController::class, 'index']);
 
 
 Route::get('/print/{id}-{bayar}-{kembalian}-{print}', [RecipeController::class, 'printRecipe']);
+Route::get('/print/{id}-{bayar}-{kembalian} ', [PrintController::class, 'index']);
 
 Route::get('/laporan', Laporanfull::class);
 
