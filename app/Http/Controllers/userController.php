@@ -7,6 +7,8 @@ use App\Models\Barang as ModelsBarang;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\Printer;
 
 class userController extends Controller
 {
@@ -17,7 +19,25 @@ class userController extends Controller
      */
     public function index()
     {
-        return view('coba');
+        try {
+            // Membuat koneksi ke printer lokal (pastikan nama printer sesuai)
+            $connector = new WindowsPrintConnector("POS58usb");
+
+            // Membuat objek printer dari koneksi
+            $printer = new Printer($connector);
+
+            // Mencetak teks ke printer
+            $printer->text('aaaaaa');
+
+            // Menggulirkan kertas (opsional)
+            $printer->feed();
+
+            // Memutuskan koneksi ke printer
+            $printer->close();
+            } catch (\Exception $e) {
+                // Tangani kesalahan jika ada
+                echo "Kesalahan: " . $e->getMessage();
+            }
     }
 
     /**

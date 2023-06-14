@@ -61,7 +61,7 @@ Route::get('/bar', [userController::class, 'index']);
 
 
 Route::get('/print/{id}-{bayar}-{kembalian}-{print}', [RecipeController::class, 'printRecipe']);
-Route::get('/print/{id}-{bayar}-{kembalian} ', [PrintController::class, 'index']);
+Route::get('/prints/{id}-{bayar}-{kembalian} ', [PrintController::class, 'index']);
 
 Route::get('/laporan', Laporanfull::class)->middleware('auth');
 Route::get('/export-ambil', [ExportExcel::class, 'exportall_ambil'])->name('exportall_ambil');

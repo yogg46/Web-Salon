@@ -211,11 +211,20 @@ class KasirController extends Component
             ]);
             $this->layid = $layanan->id;
         }
-        $url = url('/print/' . $this->layid) . '-' . $this->bayar . '-' . $this->kembalian . '-' . $this->pp;
+        if ($this->pp) {
+
+            $url = url('/print/' . $this->layid) . '-' . $this->bayar . '-' . $this->kembalian . '-' . $this->pp;
+            return redirect($url);
+        } else {
+            $url = url('/prints/' . $this->layid) . '-' . $this->bayar . '-' . $this->kembalian;
+            $this->emit('openNewTab', $url);
+            $this->dispatchBrowserEvent('openNewTab', ['url' => $url]);
+        }
 
         $this->alert('success', 'Data Berhasil Disimpan');
 
         $this->resetInput();
+
         // Redirect the user to the printing URL and open it in a new tab
         // return Redirect::away($url)
         //     ->with('success', 'Printing page opened in a new tab.')
@@ -223,9 +232,9 @@ class KasirController extends Component
 
         // $url = 'https://www.example.com';
         // $newTabUrl = 'https://example.com/new-tab-url';
-        // $this->dispatchBrowserEvent('openNewTab', ['url' => $url]);
         // $this->emit('openNewTab', $url);
-        return redirect($url);
+        // $this->dispatchBrowserEvent('openNewTab', ['url' => $url]);
+        return redirect()->route('kasir');
         // Redirect back to form page
 
     }

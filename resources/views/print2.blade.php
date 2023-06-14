@@ -91,7 +91,8 @@
                 margin: 0;
                 box-shadow: none;
             }
-            .brand{
+
+            .brand {
                 width: 60%;
             }
 
@@ -114,7 +115,7 @@
             setTimeout(function() {
                 printed = true;
             }, 500); // Wait for 500ms (0.5 seconds) before setting printed to true
-
+            console.log(printed);
             // Close the window only if the print dialog was opened
             window.onfocus = function() {
                 if (printed) {
@@ -133,7 +134,7 @@
             <span style="font-size: 7px;">
                 Profesonal Salon
             </span> --}}
-            <img src="/assets/img/nota.png" style="max-width: 120px;filter: grayscale(100%);
+            <img src="/assets/img/nota.png" style="max-width: 150px;filter: grayscale(100%);
             height: auto;"
                 alt="" srcset="">
 
