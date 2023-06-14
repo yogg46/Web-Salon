@@ -55,6 +55,8 @@
                         </span>
                         <span>Tambah Pengambilan</span>
                     </button>
+                    <a class="button h-button is-success  is-elevated"
+                    href="{{ route('exportall_ambil') }}" target="_blank">Export </a>
                 </div>
             </div>
 
@@ -79,7 +81,7 @@
                             @foreach ($pengambilan as $s)
                                 <tr>
                                     <td>{{ $s->no_pengambilan }}</td>
-                                    <td>{{ $s->tanggal }}</td>
+                                    <td>{{ $s->tanggal->format('d-m-Y') }}</td>
                                     <td>{{ $s->pengambilanRelasiBarang->nama_barang }}</td>
                                     <td>{{ $s->jumlah }}</td>
                                     <td>{{ $s->pengambilanRelasiUser->name }}</td>

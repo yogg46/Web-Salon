@@ -1,6 +1,9 @@
 <table id="" class="table is-datatable is-hoverable table-is-bordered">
     <thead>
         <tr>
+            <th colspan="8">LAPORAN PENGELUARAN  </th>
+        </tr>
+        <tr>
             <th>No</th>
             <th>Manufaktur</th>
             <th>tanggal</th>

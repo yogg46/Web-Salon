@@ -1,5 +1,6 @@
 <table id="" class="table is-datatable is-hoverable table-is-bordered">
     <thead>
+        
         <tr>
             <th>No</th>
             <th>Tanggal</th>

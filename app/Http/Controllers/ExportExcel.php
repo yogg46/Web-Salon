@@ -10,9 +10,11 @@ use App\Exports\MultiSheetExport;
 use App\Exports\pengeluaran;
 use App\Exports\pengeluaranall;
 use App\Exports\penglain;
+use App\Exports\ambil;
 use App\Exports\penglainAll;
 use App\Models\Layanan;
 use App\Models\Pembelian;
+use App\Models\Pengambilan;
 use App\Models\pengeluaranlain;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -95,6 +97,15 @@ class ExportExcel extends Controller
 
         return Excel::download($export, 'Seluruh_Pengeluaran_Lain.xlsx');
     }
+    public function exportall_ambil()
+    {
+        $layanans = Pengambilan::all();
+        $export = new ambil($layanans);
+
+        return Excel::download($export, 'Laporan_Pengambilan.xlsx');
+    }
+
+
     public function exportbulan_pengeluaran_lain($id)
     {
         $layanans = pengeluaranlain::whereMonth('created_at', $id)->get();

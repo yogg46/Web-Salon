@@ -24409,7 +24409,7 @@ body.is-dark .main-sidebar.is-colored .profile-dropdown .dropdown-menu .dropdown
     display: block;
     width: 100%;
     padding: 0 20px;
-    font-size: .95rem;
+    font-size: 1.2rem;
     color: #a2a5b9
 }
 
@@ -24419,8 +24419,8 @@ body.is-dark .main-sidebar.is-colored .profile-dropdown .dropdown-menu .dropdown
 
 .sidebar-block .sidebar-block-inner li>a {
     font-family: "Montserrat", sans-serif;
-    font-size: .9rem;
-    font-weight: 500;
+    font-size: 1.4rem;
+    font-weight: 900;
     color: #a2a5b9
 }
 
@@ -24432,7 +24432,7 @@ body.is-dark .main-sidebar.is-colored .profile-dropdown .dropdown-menu .dropdown
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    font-size: .9rem;
+    font-size: 1.2rem;
     font-weight: 500;
     color: #ffff;
     padding: .85rem;
@@ -24740,6 +24740,8 @@ body.is-dark .sidebar-block .sidebar-block-footer .profile-dropdown .dropdown-me
 
 body:not(.is-dark) .sidebar-block.is-colored {
     background: #1d2532 !important;
+    /* warna */
+    /* background: #1d2532 !important; */
     /* background: linear-gradient(to bottom, #6b1ccd, #2d6ef4) !important; */
     border-color: #3d4e68 !important
 }
@@ -24754,6 +24756,7 @@ body:not(.is-dark) .sidebar-block.is-colored .sidebar-block-header h3 {
 
 body:not(.is-dark) .sidebar-block.is-colored .sidebar-block-inner {
     background: #1d2532 !important
+  /* warna */
     /* background: linear-gradient(to bottom, #6b1ccd, #2d6ef4) !important; */
 }
 
