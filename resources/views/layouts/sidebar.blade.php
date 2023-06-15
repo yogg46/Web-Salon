@@ -242,6 +242,12 @@
                                     <span>Laporan Pengeluaran Lain</span>
                                 </a>
                             </li>
+                            <li>
+                                <a class="is-submenu" href="/pengambilan">
+                                    <i class="lnil lnil-book"></i>
+                                    <span>Laporan Pengambilan</span>
+                                </a>
+                            </li>
 
                         </ul>
 
@@ -359,9 +365,7 @@
 
                 <li>
                     <a class="single-link" href="/jasa">
-                        {{-- <span class="icon">
-                            <i data-feather="list"></i>
-                        </span> --}}
+
                         Jasa
                     </a>
                 </li>
@@ -386,6 +390,12 @@
                     </div>
                     <ul>
                         <li>
+                            <a class="is-submenu" href="/laporan">
+                                <i class="lnil lnil-book"></i>
+                                <span>Laporan </span>
+                            </a>
+                        </li>
+                        <li>
                             <a class="is-submenu" href="/laporan-pemasukan">
                                 <i class="lnil lnil-book"></i>
                                 <span>Laporan Pemasukan</span>
@@ -395,6 +405,12 @@
                             <a class="is-submenu" href="/laporan-pengeluaran">
                                 <i class="lnil lnil-book"></i>
                                 <span>Laporan Pengeluaran</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="is-submenu" href="/laporan-pengeluaran-lain">
+                                <i class="lnil lnil-book"></i>
+                                <span>Laporan Pengeluaran Lain</span>
                             </a>
                         </li>
 
@@ -479,8 +495,14 @@
                     </div>
                     <ul>
                         <li>
+                            <a class="is-submenu" href="/laporan">
+                                <i class="lnil lnil-book"></i>
+                                <span>Laporan </span>
+                            </a>
+                        </li>
+                        <li>
                             <a class="is-submenu" href="/laporan-pemasukan">
-                                <i class="lnil  lnil-book"></i>
+                                <i class="lnil lnil-book"></i>
                                 <span>Laporan Pemasukan</span>
                             </a>
                         </li>
@@ -488,6 +510,18 @@
                             <a class="is-submenu" href="/laporan-pengeluaran">
                                 <i class="lnil lnil-book"></i>
                                 <span>Laporan Pengeluaran</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="is-submenu" href="/laporan-pengeluaran-lain">
+                                <i class="lnil lnil-book"></i>
+                                <span>Laporan Pengeluaran Lain</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="is-submenu" href="/pengambilan">
+                                <i class="lnil lnil-book"></i>
+                                <span>Laporan Pengambilan</span>
                             </a>
                         </li>
 

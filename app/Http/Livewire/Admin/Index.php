@@ -108,7 +108,7 @@ class Index extends Component
         $this->validate([
             'name' => 'required|min:6|regex:/^[a-zA-Z ]*$/',
             // 'username' => 'required|regex:/^\S*$/u|unique:users',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email|unique:tb_user',
             'role' => 'required',
         ]);
 

@@ -40,6 +40,7 @@
                 </div>
             </div>
         </div>
+
         <div class="field ml-2">
             <div class="control has-icons-left">
                 <div class="select">
@@ -58,6 +59,10 @@
                     <i class="lnil lnil-timer"></i>
                 </div>
             </div>
+        </div>
+        <div wire:loading wire:target="select">
+            <span class="loader"></span>
+
         </div>
 
         <div class="buttons">
@@ -105,11 +110,12 @@
 
                         <td class=" text-center">
                             <span
-                                class="tag {{ $key->role == 'admin' ? 'is-success' : 'is-info' }} is-rounded">{{ $key->role == 'bos' ? 'Owner' : (($key->role == 'gudang' ? 'Pegawai Gudang' : $key->role == 'admin') ? 'Admin' : 'Kasir') }}</span>
+                                class="tag {{ $key->role == 'admin' ? 'is-success' : 'is-info' }} is-rounded">{{ $key->role == 'bos' ? 'Owner' : ($key->role == 'gudang' ? 'Pegawai Gudang' : ($key->role == 'admin' ? 'Admin' : 'Kasir')) }}</span>
                         </td>
                         <td class=" text-center">
                             <span class="tag {{ $key->status == 'aktif' ? 'is-success' : 'is-danger' }}  is-rounded"
-                                style="text-transform: capitalize;">{{ $key->status == 'aktif' ? 'Aktif' : 'Tidak Aktif' }} </span>
+                                style="text-transform: capitalize;">{{ $key->status == 'aktif' ? 'Aktif' : 'Tidak Aktif' }}
+                            </span>
                         </td>
 
 
@@ -176,12 +182,12 @@
             //         $("#add-user").modal('hide');
             //     })
             window.addEventListener('closeModal', event => {
-                    $("#add-user").closest(".modal").removeClass("is-active");
-                })
-
-            window.livewire.on('closeModal', () => {
                 $("#add-user").closest(".modal").removeClass("is-active");
             })
-        <script>
-    @endpush
-</div>
+
+            window.livewire.on('closeModal', () => {
+                    $("#add-user").closest(".modal").removeClass("is-active");
+                }) <
+                script >
+            @endpush <
+            /div>

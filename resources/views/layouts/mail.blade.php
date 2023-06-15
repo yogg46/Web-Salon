@@ -73,7 +73,7 @@
                                                             <tr>
                                                                 <td align="center" valign="bottom" colspan="2"
                                                                     cellpadding="3">
-                                                                    <img alt="Coinbase" width="80"
+                                                                    <img alt="Salon Fransisco" width="80"
                                                                         src="https://drive.google.com/uc?id=1e6MKkJBs77LkuuYajEak83CVMEQUtcw9" />
                                                                 </td>
                                                             </tr>
